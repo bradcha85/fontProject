@@ -1,0 +1,517 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>font</title>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+ <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<style>
+
+@font-face {
+  font-family: 'JejuMyeongjo'; 
+  src: url(JejuMyeongjo.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'JejuHallasan'; 
+  src: url(JejuHallasan.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'JejuGothic'; 
+  src: url(JejuGothic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'BMYEONSUNG'; 
+  src: url(BMYEONSUNG.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'BMHANNAPro'; 
+  src: url(BMHANNAPro.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'BMHANNA_11yrs'; 
+  src: url(BMHANNA_11yrs.ttf) format('truetype');
+}
+
+
+
+#result {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    width: 100%;
+    height: 250px;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+}
+
+.result{
+  font-family: 'testFont';
+ 
+}
+
+#topDiv{
+  width: 100%;
+  border-bottom:1px;
+}
+
+#brandLogo{
+  margin-bottom: 0px;
+  margin-left:15px;
+  font-size: 75px;
+  float: left;
+  width:100%;
+}
+
+#topLine{
+ border-top: 2px solid !important;
+ margin-bottom: 0px;
+}
+
+.sMenu{
+ float:right;
+ margin-right: 15px;
+ margin-bottom: 10px;
+ font-size: 20px;
+
+}
+
+.fontSpec{
+  cursor: pointer;
+}
+
+input[type='range'] {
+  
+  width: 100px;
+  height: 25px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid black;
+  margin-left:-40px;
+
+   -webkit-transform:rotate(90deg); 
+     -moz-transform:rotate(90deg); 
+     -o-transform:rotate(90deg); 
+     -ms-transform:rotate(90deg); 
+     transform:rotate(90deg); 
+}
+input[type='range'],
+input[type='range']::-webkit-slider-runnable-track,
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  width: 200px;
+  height: 10px;
+  background: #AAA;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  margin-top: -5px;
+  background: steelblue;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+input[type='range']::-webkit-slider-thumb::before {
+  position: absolute;
+  content: '';
+  height: 10px; /* equal to height of runnable track */
+  width: 500px; /* make this bigger than the widest range input element */
+  left: -502px; /* this should be -2px - width */
+  top: 8px; /* don't change this */
+  background: #777;
+}
+
+
+.tArea{
+  margin-left: 45px; 
+  margin-top: -125px; 
+  resize: none; 
+  overflow: auto;
+  /*border:0;*/
+  padding-left:5px;
+  width:200px;
+  height:100px;
+  font-size:30px;
+}
+
+.simple{
+  height:65px; 
+  border-bottom: 2px solid;
+
+}
+
+.simple > p  {
+  float:left;
+  font-size: 25px; 
+  font-weight:bold;
+  margin-left:25px;
+  margin-top:14px;
+} 
+
+.simple > img {
+  float:left;
+  margin-left:25px;
+  margin-top:22px;
+}
+
+.detail{
+  border-bottom: 2px solid;
+}
+
+.detail > p  {
+  margin-left:25px; 
+  margin-top:10px;
+} 
+
+.detail > .fontName {
+  font-size: 25px;
+  text-decoration: underline; 
+  font-weight:bold;
+}
+
+.detail > .large{
+  font-size: 25px; 
+  font-weight:bold;
+}
+
+.detail > img {
+  float: right; 
+  margin-top:-35px; 
+  margin-right:10px;
+}
+
+
+
+
+</style>
+</head>
+<body>
+   
+   <div id="topDiv">
+   <p id="brandLogo">
+   ourie
+   </p>
+ 
+   <div class="sMenu">cart</div>
+   <div class="sMenu">ask</div>
+   <div class="sMenu">about</div>
+   <div class="sMenu">style</div>
+
+   </div>
+
+   <hr id="topLine" width = "100%" color = "black">
+   
+   <div style=" width:65%; float:left; margin-top:15px;">
+    <!--  <input type="range" class="fontSizeSlider" style="width:500px;" min="5" max="50">
+     <input type="range" class="lineHeightSlider" style="width:500px;" orient="vertical" min="1" max="5"> -->
+    <!-- <p class="result" id="result">차보라Brian</p> -->
+    <!--  <textarea class="result" id="result" cols="50" rows="8" > -->
+     <div id="result" class="result" contenteditable>
+       <input type="range" name="fSize" class="fontSizeSlider"  min="5" max="100" style="margin-top:35px;">
+       <input type="range" class="lineHeightSlider"  min="1" max="5" style="margin-top:75px;">
+       <textarea class="tArea" cols="30" rows="4">hi</textarea>
+     </div>
+   </div>
+
+ <div id="rightDiv" style="width: 35%; float:right; border-left:2px solid;">
+  
+       <div class="fontSpec simple" font="JejuMyeongjo" style="font-family: JejuMyeongjo">
+        <p class="fontName">JejuMyeongjo</p>
+        <img class="showDetail" src="http://localhost:3000/image/add.png">
+       </div> 
+
+       <div class="fontSpec simple" font="JejuHallasan" style="font-family: JejuHallasan">
+        <p class="fontName">JejuHallasan</p>
+         <img class="showDetail" src="http://localhost:3000/image/add.png">
+       </div>
+       
+       <div class="fontSpec simple" font="JejuGothic" style="font-family: JejuGothic">
+        <p class="fontName">JejuGothic</p>
+         <img class="showDetail" src="http://localhost:3000/image/add.png">
+       </div>
+
+       <div class="fontSpec simple" font="BMYEONSUNG" style="font-family: BMYEONSUNG">
+        <p class="fontName">BMYEONSUNG</p>
+         <img class="showDetail" src="http://localhost:3000/image/add.png">
+       </div>
+
+       <div class="fontSpec simple" font="BMHANNAPro" style="font-family: BMHANNAPro">
+        <p class="fontName">BMHANNAPro</p>
+         <img class="showDetail" src="http://localhost:3000/image/add.png">
+       </div>
+
+       <div class="fontSpec simple" font="BMHANNA_11yrs" style="font-family: BMHANNA_11yrs">
+        <p class="fontName">BMHANNA_11yrs</p>
+         <img class="showDetail" src="http://localhost:3000/image/add.png">
+       </div>
+
+   
+ </div>
+
+
+
+  <script>
+
+    /*$('.tArea').on('mousedown', function (e) {
+
+
+    $(this).addClass('active').parents().on('mousemove', function (e) {
+        $('.active').offset({
+            top: e.pageY - $('.active').outerHeight() / 2,
+            left: e.pageX - $('.active').outerWidth() / 2
+        }).on('mouseup', function () {
+            $(this).removeClass('active');
+        });
+    });
+    //return false;    
+});*/
+         
+     
+    
+   
+
+$(document).ready(function(){
+
+ $(document).on("click",".showDetail",function(){
+
+     var fontSpec = $(this).parents(".fontSpec");
+
+     var detail  = '<p class="fontName">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
+         detail += '<p class="small">abcdefghijklmnopqrstuvwxyz<br>';
+         detail += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>';
+         detail += '0123456789!@#$%^&*()-_=+</p>';
+         detail += '<p class="large">The quick brown fox jumps <br> over the lazy dog.</p>';
+         detail += '<img class="showSimple" src="http://localhost:3000/image/minus.png">';
+
+       fontSpec.empty();
+       fontSpec.removeClass("simple");
+       fontSpec.addClass("detail");
+       fontSpec.append(detail);
+
+    })
+
+    $(document).on("click",".showSimple",function(){
+    
+     var fontSpec = $(this).parents(".fontSpec");
+
+     var simple  = '<p class="fontName">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
+         simple += '<img class="showDetail" src="http://localhost:3000/image/add.png">';
+
+       fontSpec.empty();
+       fontSpec.removeClass("detail");
+       fontSpec.addClass("simple");
+       fontSpec.append(simple);
+
+    })
+
+
+    $('.tArea').draggable({cancel: 'text'});
+    let changedFont;
+    let addTag = false;
+
+    $(".fontSpec").draggable({
+        helper: "clone",
+        cursor: 'pointer',
+        start: function( event, ui ) {
+          changedFont = $(this).attr("font");
+          addTag = true;
+        }
+    });
+
+    var no = 1;
+
+    $("#result").droppable({
+       
+      drop: function( event, ui ) {
+       
+        let newArea = '<textarea class="tArea" id="'+no+'" cols="30" rows="4">'+changedFont+'</textarea>';
+        let z_idx = 10;
+        $('.tArea').draggable({
+          cancel: 'text',
+          cursor: 'pointer'
+        }).mousedown(function(){
+            $(this).css('z-index', z_idx); // 클릭한 textarea 제일 위로 올라오게끔.
+            z_idx++;
+         });
+
+
+        if(addTag == true){
+        $(this).append(newArea)
+        $('#'+no).offset({ top: event.pageY, left: event.pageX-60});
+        $("style").append( "@font-face {\n" +
+                                "\tfont-family: \""+changedFont+"\";\n" + 
+                                "\tsrc:url('"+changedFont+".ttf') format('truetype');\n" + 
+                            "}\n" );
+         $('#'+no).css({"font-family": changedFont});
+        }
+        addTag = false;
+        no++;
+        
+      }
+
+    });
+
+
+      var result = $(".result");
+      var tArea =  $(".tArea");
+      var fontSizeSlider = $(".fontSizeSlider");
+      var lineHeightSlider = $(".lineHeightSlider");
+
+      fontSizeSlider.on('input', function() {
+          tArea.css("font-size",$(this).val() ); 
+      });
+
+      lineHeightSlider.on('input', function() {
+          tArea.css("line-height",$(this).val());
+      });
+
+      /*  var result = $(".result");
+      var slider = $(".slider")
+      slider.on('input', function() {
+          result.html( $(this).val() );
+          */
+      });
+
+
+    // 등록 가능한 파일 사이즈 MB
+    var uploadSize = 10;
+ 
+    $(function (){
+        // 파일 드롭 다운
+        fileDropDown();
+    });
+ 
+    // 파일 드롭 다운
+    function fileDropDown(){
+        var dropZone = $("#result");
+        //Drag기능 
+      /*  dropZone.on('dragenter',function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            // 드롭다운 영역 css
+            dropZone.css('background-color','#E3F2FC');
+        });
+        dropZone.on('dragleave',function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            // 드롭다운 영역 css
+            dropZone.css('background-color','#FFFFFF');
+        });
+        dropZone.on('dragover',function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            // 드롭다운 영역 css
+            dropZone.css('background-color','#E3F2FC');
+        });*/
+        dropZone.on('drop',function(e){
+            e.preventDefault();     
+            console.log(e.originalEvent.type);  
+            if(e.originalEvent.type == "drop"){
+            renderNewFont(e);
+            }
+        });
+    }
+           var addNo = 1;
+
+    function renderNewFont(e){
+            
+            
+            var files = e.originalEvent.dataTransfer.files;
+            var file = files[0];
+            var fileName = file.name;
+            var fileNameArr = fileName.split("\.");
+            var ext = fileNameArr[fileNameArr.length - 1]; // 확장자
+            var fileSize = file.size / 1024 / 1024; // 파일 사이즈(단위 :MB)
+
+            if($.inArray(ext, ['ttf', 'eot', 'woff']) < 0){
+                    // 확장자 체크
+                    alert("ttf, eot, woff 파일형식만 지원합니다.");
+                    return;
+              }else if(fileSize > uploadSize){
+                    // 파일 사이즈 체크
+                    alert("용량 초과\n업로드 가능 용량 : " + uploadSize + " MB");
+                    return;
+              }
+
+
+            if(files != null){
+                if(files.length < 1){
+                    alert("폴더 업로드 불가");
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append("fontUpload", file);
+
+                $.ajax({
+                url:"http://localhost:3000/fontUpload",
+                data:formData,
+                type:'POST',
+                enctype:'multipart/form-data',
+                processData:false,
+                contentType:false,
+                dataType:'json',
+                cache:false,
+                success:function(result){
+                 
+                      $("style").append( "@font-face {\n" +
+                                    "\tfont-family: \"currentFont\";\n" + 
+                                    "\tsrc:url('"+result["originalName"]+"') format('truetype');\n" + 
+                                "}\n" );
+
+
+                     $('.result').css({"font-family": "currentFont"});
+
+                 let newArea = '<textarea class="tArea" id="'+addNo+'" cols="30" rows="4">'+result["originalName"].split("\.")[0]+'</textarea>';
+                 $('.result').append(newArea);
+                                
+                 $('#'+addNo).offset({ top: e.pageY, left: e.pageX-60});
+
+                var z_idx = 10;
+                $('.tArea').draggable({
+                          cancel: 'text',
+                          cursor: 'pointer'
+                        }).mousedown(function(){
+                           $(this).css('z-index', z_idx); // 클릭한 이미지만 z-index 증가시킴
+                            z_idx++;
+                        });
+                 addNo++
+
+
+                }
+            });
+            }else{
+                alert("ERROR");
+            }
+    }
+
+     
+  </script>
+   
+</body>
+</html>
+
+
+
+		
