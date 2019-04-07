@@ -62,10 +62,6 @@
     resize: both;
 }
 
-.result{
-  font-family: 'testFont';
- 
-}
 
 #topDiv{
   width: 100%;
@@ -212,7 +208,8 @@ input[type='range']::-webkit-slider-thumb::before {
    <p id="brandLogo">
    ourie
    </p>
- 
+  
+   <div class="sMenu">test</div>
    <div class="sMenu">cart</div>
    <div class="sMenu">ask</div>
    <div class="sMenu">about</div>
@@ -444,9 +441,9 @@ $(document).ready(function(){
             var ext = fileNameArr[fileNameArr.length - 1]; // 확장자
             var fileSize = file.size / 1024 / 1024; // 파일 사이즈(단위 :MB)
 
-            if($.inArray(ext, ['ttf', 'eot', 'woff']) < 0){
+            if($.inArray(ext, ['ttf', 'eot', 'woff', 'otf']) < 0){
                     // 확장자 체크
-                    alert("ttf, eot, woff 파일형식만 지원합니다.");
+                    alert("ttf, eot, woff, otf 파일형식만 지원합니다.");
                     return;
               }else if(fileSize > uploadSize){
                     // 파일 사이즈 체크
@@ -474,18 +471,21 @@ $(document).ready(function(){
                 dataType:'json',
                 cache:false,
                 success:function(result){
+
+                  let randomFontName = generateFontName();
                  
                       $("style").append( "@font-face {\n" +
-                                    "\tfont-family: \"currentFont\";\n" + 
-                                    "\tsrc:url('"+result["originalName"]+"') format('truetype');\n" + 
+                                    "\tfont-family: \""+randomFontName+"\";\n" + 
+                                    "\tsrc:url('"+result["originalName"]+"') format('truetype'),\n" + 
+                                    "\turl('"+result["originalName"]+"') format('opentype');\n" + 
                                 "}\n" );
 
 
-                     $('.result').css({"font-family": "currentFont"});
+                     
 
                  let newArea = '<textarea class="tArea" id="'+addNo+'" cols="30" rows="4">'+result["originalName"].split("\.")[0]+'</textarea>';
                  $('.result').append(newArea);
-                                
+                 $('#'+addNo).css({"font-family": randomFontName});                   
                  $('#'+addNo).offset({ top: e.pageY, left: e.pageX-60});
 
                 var z_idx = 10;
@@ -493,11 +493,11 @@ $(document).ready(function(){
                           cancel: 'text',
                           cursor: 'pointer'
                         }).mousedown(function(){
-                           $(this).css('z-index', z_idx); // 클릭한 이미지만 z-index 증가시킴
+                           $(this).css('z-index', z_idx); // 클릭한 이미지만 제일 위로 올라오게끔.
                             z_idx++;
                         });
                  addNo++
-
+               
 
                 }
             });
@@ -505,6 +505,16 @@ $(document).ready(function(){
                 alert("ERROR");
             }
     }
+
+    function generateFontName(){
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
 
      
   </script>
