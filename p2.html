@@ -292,9 +292,9 @@ $(document).ready(function(){
 
  $(document).on("click",".showDetail",function(){
 
-     var fontSpec = $(this).parents(".fontSpec");
+     let fontSpec = $(this).parents(".fontSpec");
 
-     var detail  = '<p class="fontName">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
+     let detail  = '<p class="fontName">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
          detail += '<p class="small">abcdefghijklmnopqrstuvwxyz<br>';
          detail += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>';
          detail += '0123456789!@#$%^&*()-_=+</p>';
@@ -310,9 +310,9 @@ $(document).ready(function(){
 
     $(document).on("click",".showSimple",function(){
     
-     var fontSpec = $(this).parents(".fontSpec");
+     let fontSpec = $(this).parents(".fontSpec");
 
-     var simple  = '<p class="fontName">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
+     let simple  = '<p class="fontName">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
          simple += '<img class="showDetail" src="image/add.png">';
 
        fontSpec.empty();
@@ -433,7 +433,6 @@ $(document).ready(function(){
 
     function renderNewFont(e){
             
-            
             var files = e.originalEvent.dataTransfer.files;
             var file = files[0];
             var fileName = file.name;
@@ -476,8 +475,8 @@ $(document).ready(function(){
                  
                       $("style").append( "@font-face {\n" +
                                     "\tfont-family: \""+randomFontName+"\";\n" + 
-                                    "\tsrc:url('"+result["originalName"]+"') format('truetype'),\n" + 
-                                    "\turl('"+result["originalName"]+"') format('opentype');\n" + 
+                                    "\tsrc:url('"+result["originalName"]+"') format('truetype'),\n" +
+                                    "\turl('"+result["originalName"]+"') format('opentype');\n" +    
                                 "}\n" );
 
 

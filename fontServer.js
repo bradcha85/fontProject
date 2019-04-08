@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({extended : true}));
 let storage = multer.diskStorage({ 
 	destination: function(req, file ,callback){ 
 		callback(null, "upload/") 
+		
 	}, 
 	filename: function(req, file, callback){ 
 			callback(null, file.originalname) } 
@@ -47,6 +48,11 @@ app.get('/',function(req,res){
 app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) { 
 	let file = req.file 
 	console.log(file);
+	let originalName = file.originalname;
+	console.log(file.originalname.split("\.")[1]);
+	
+	
+    
 
 	let result = { originalName : file.originalname, 
 				   size : file.size, 
