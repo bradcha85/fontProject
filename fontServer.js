@@ -48,11 +48,10 @@ app.get('/',function(req,res){
 app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) { 
 	let file = req.file 
 	console.log(file);
+	console.log("parameter check : " + req.body.cType);
 	let originalName = file.originalname;
 	console.log(file.originalname.split("\.")[1]);
 	
-	
-    
 
 	let result = { originalName : file.originalname, 
 				   size : file.size, 

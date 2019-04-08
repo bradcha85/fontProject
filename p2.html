@@ -186,7 +186,7 @@ input[type='range']::-webkit-slider-thumb::before {
   font-weight:bold;
 }
 
-.detail > .large{
+.detail > .large {
   font-size: 25px; 
   font-weight:bold;
 }
@@ -197,6 +197,9 @@ input[type='range']::-webkit-slider-thumb::before {
   margin-right:10px;
 }
 
+.drggableImage {
+  width:120px;
+}
 
 
 
@@ -439,16 +442,24 @@ $(document).ready(function(){
             var fileNameArr = fileName.split("\.");
             var ext = fileNameArr[fileNameArr.length - 1]; // 확장자
             var fileSize = file.size / 1024 / 1024; // 파일 사이즈(단위 :MB)
+            var contentType = "";
 
-            if($.inArray(ext, ['ttf', 'eot', 'woff', 'otf']) < 0){
+            if($.inArray(ext, ['ttf', 'eot', 'woff', 'otf', 'png', 'jpg','gif','bmp' ]) < 0){
                     // 확장자 체크
-                    alert("ttf, eot, woff, otf 파일형식만 지원합니다.");
+                    alert("폰트 또는 이미지 파일형식만 지원합니다.");
                     return;
+
               }else if(fileSize > uploadSize){
                     // 파일 사이즈 체크
                     alert("용량 초과\n업로드 가능 용량 : " + uploadSize + " MB");
                     return;
-              }
+
+              }else if($.inArray(ext, ['ttf', 'eot', 'woff', 'otf']) >= 0 ){
+                contentType = "font";
+              
+              }else if($.inArray(ext, ['png', 'jpg', 'gif', 'bmp']) >= 0 ){
+                contentType = "image";
+              } 
 
 
             if(files != null){
@@ -456,10 +467,11 @@ $(document).ready(function(){
                     alert("폴더 업로드 불가");
                     return;
                 }
-
+             
                 let formData = new FormData();
                 formData.append("fontUpload", file);
-
+                formData.append("cType","testString");
+                console.log("contetn type : " + contentType);
                 $.ajax({
                 url:"http://localhost:3000/fontUpload",
                 data:formData,
@@ -471,56 +483,68 @@ $(document).ready(function(){
                 cache:false,
                 success:function(result){
 
-                  let randomFontName = generateFontName();
-                 
-                      $("style").append( "@font-face {\n" +
-                                    "\tfont-family: \""+randomFontName+"\";\n" + 
-                                    "\tsrc:url('"+result["originalName"]+"') format('truetype'),\n" +
-                                    "\turl('"+result["originalName"]+"') format('opentype');\n" +    
-                                "}\n" );
+                      let z_idx = 10;
+                      if(contentType == "font"){
+                        let randomFontName = generateFontName();
+                    
+                          $("style").append( "@font-face {\n" +
+                                        "\tfont-family: \""+randomFontName+"\";\n" + 
+                                        "\tsrc:url('"+result["originalName"]+"') format('truetype'),\n" +
+                                        "\turl('"+result["originalName"]+"') format('opentype');\n" +    
+                                    "}\n" );
 
+                                    
+                                    let newTextArea = '<textarea class="tArea" id="'+addNo+'" cols="30" rows="4">'+result["originalName"].split("\.")[0]+'</textarea>';
+                                    $('.result').append(newTextArea);
+                                    $('#'+addNo).css({"font-family": randomFontName});                   
+                                    $('#'+addNo).offset({ top: e.pageY, left: e.pageX-60});
 
-                     
-
-                 let newArea = '<textarea class="tArea" id="'+addNo+'" cols="30" rows="4">'+result["originalName"].split("\.")[0]+'</textarea>';
-                 $('.result').append(newArea);
-                 $('#'+addNo).css({"font-family": randomFontName});                   
-                 $('#'+addNo).offset({ top: e.pageY, left: e.pageX-60});
-
-                var z_idx = 10;
-                $('.tArea').draggable({
+                                    $('.tArea').draggable({
+                                      cancel: 'text',
+                                      cursor: 'pointer'
+                                    }).mousedown(function(){
+                                      $(this).css('z-index', z_idx); // 클릭한 이미지만 제일 위로 올라오게끔.
+                                      z_idx++;
+                                    });
+                                  }
+                      if(contentType == "image"){
+                        
+                        newImageArea = "<img class='drggableImage' id='"+addNo+"'src='"+result["originalName"]+"'>";
+                        $('.result').append(newImageArea);
+                        $('#'+addNo).offset({ top: e.pageY, left: e.pageX-60});
+              
+                        $('.drggableImage').draggable({
                           cancel: 'text',
                           cursor: 'pointer'
                         }).mousedown(function(){
-                           $(this).css('z-index', z_idx); // 클릭한 이미지만 제일 위로 올라오게끔.
-                            z_idx++;
+                          $(this).css('z-index', z_idx); // 클릭한 이미지만 제일 위로 올라오게끔.
+                          z_idx++;
                         });
-                 addNo++
-               
-
+                      }
+                      addNo++
+                    }
+                  });
+                }else{
+                  alert("ERROR");
                 }
-            });
-            }else{
-                alert("ERROR");
-            }
-    }
-
-    function generateFontName(){
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 5; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-  }
-
-     
-  </script>
+              }
+                      
+          function generateFontName(){
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            
+            for( var i=0; i < 5; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+            
+            return text;
+          }
+                      
+        </script>
    
-</body>
-</html>
-
-
-
+  </body>
+  </html>
+  
+  
+  
+  
 		
