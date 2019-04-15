@@ -144,7 +144,7 @@ input[type='range']::-webkit-slider-thumb::before {
   margin-top: -125px; 
   resize: none; 
   overflow: auto;
-  /*border:0;*/
+  border:0; 
   padding-left:5px;
   width:200px;
   height:100px;
@@ -201,6 +201,12 @@ input[type='range']::-webkit-slider-thumb::before {
   width:120px;
 }
 
+.modify{
+  border:1 !important;
+  border-color:brown;
+  border-style:dashed;
+   
+}
 
 
 </style>
@@ -293,6 +299,26 @@ input[type='range']::-webkit-slider-thumb::before {
 
 $(document).ready(function(){
 
+ 
+
+  $(document).on("mouseenter", ".tArea", function() {
+    $(this).css("border",1);
+    $(this).css("border-style","dashed");
+  });
+
+  $(document).on("mouseleave", ".tArea", function() {
+    $(this).css("border",0);
+  });
+
+  $(document).on("toggle", ".tArea", function() {
+    $(this).css("border",0);
+  });
+
+  $(document).on("click", ".tArea", function() {
+    $(".modify").removeClass("modify");
+    $(this).addClass("modify")
+  });
+
  $(document).on("click",".showDetail",function(){
 
      let fontSpec = $(this).parents(".fontSpec");
@@ -379,18 +405,14 @@ $(document).ready(function(){
       var lineHeightSlider = $(".lineHeightSlider");
 
       fontSizeSlider.on('input', function() {
-          tArea.css("font-size",$(this).val() ); 
+        $(".modify").css("font-size",$(this).val() ); 
       });
 
       lineHeightSlider.on('input', function() {
-          tArea.css("line-height",$(this).val());
+        $(".modify").css("line-height",$(this).val());
       });
 
-      /*  var result = $(".result");
-      var slider = $(".slider")
-      slider.on('input', function() {
-          result.html( $(this).val() );
-          */
+    
       });
 
 
