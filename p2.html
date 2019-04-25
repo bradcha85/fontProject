@@ -207,9 +207,23 @@ input[type='range']::-webkit-slider-thumb::before {
   margin-top:5px;
   margin-left:-2px;
   border : 1px solid;
-  width:6%;
+  width:40px;
 }
 
+.triangle{
+  width : 0;
+  height : 0;
+  border-top : 10px solid transparent;
+  border-right : 10px solid #111111;
+  border-bottom : 10px solid transparent;
+  border-left : 10px solid transparent;
+  transform: rotate(225deg);
+  margin-left:30px;
+  margin-top:-5px;
+  margin-bottom: -10px;
+  
+
+}
 
 </style>
 </head>
@@ -249,11 +263,27 @@ input[type='range']::-webkit-slider-thumb::before {
          <input type="range" class="lineHeightSlider"  min="1" max="5" style="margin-top:20px; margin-bottom: 30px;">
        </div>
        <div class="adjustTable" style="overflow:hidden; margin-top:-1px;">
-        <hr id="line1" style="margin-left:5px; margin-top:3px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
-        <hr id="line2" style="margin-left:5px; margin-top:4px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
-        <hr id="line3" style="margin-left:5px; margin-top:5px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
-
-       </div>       
+        <hr style="margin-left:9px; margin-top:8px; margin-bottom: 0px; width:40%; border-top:1px solid black !important;">
+        <hr style="margin-left:9px; margin-top:4.3px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
+        <hr style="margin-left:9px; margin-top:4.6px; margin-bottom: 0px; width:40%; border-top:1px solid black !important;">
+        <hr style="margin-left:9px; margin-top:4.9px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
+        <hr style="margin-left:9px; margin-top:5.2px; margin-bottom: 8px; width:40%; border-top:1px solid black !important;">
+         <div class="triangle"></div>
+       </div>   
+       <div class="adjustTable" style="overflow:hidden; margin-top:-42px; margin-left:40px;">
+        <hr style="margin-left:3px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
+        <hr style="margin-left:3px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black !important;">
+        <hr style="margin-left:3px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
+        <hr style="margin-left:3px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black !important;">
+        <hr style="margin-left:3px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black !important;">
+      </div>
+      <div class="adjustTable" style="overflow:hidden; margin-top:-42px; margin-left:79px;">
+        <hr style="margin-left:9px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
+        <hr style="margin-left:10px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black !important;">
+        <hr style="margin-left:9px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
+        <hr style="margin-left:10px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black !important;">
+        <hr style="margin-left:9px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black !important;">
+      </div>
 
        <textarea class="tArea" cols="30" rows="4">hi</textarea>
      </div>
@@ -313,8 +343,6 @@ input[type='range']::-webkit-slider-thumb::before {
 });*/
          
      
-    
-   
 
 $(document).ready(function(){
 
