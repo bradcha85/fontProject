@@ -56,7 +56,7 @@
     font: medium -moz-fixed;
     font: -webkit-small-control;
     width: 100%;
-    height: 250px;
+    height: 500px;
     overflow: auto;
     padding: 2px;
     resize: both;
@@ -95,12 +95,12 @@
 
 input[type='range'] {
   
-  width: 100px;
+  width: 70px;
   height: 25px;
   overflow: hidden;
   cursor: pointer;
-  border: 1px solid black;
-  margin-left:-40px;
+  /* border: 1px solid black; */
+  margin-left:-16px;
 
    -webkit-transform:rotate(90deg); 
      -moz-transform:rotate(90deg); 
@@ -108,6 +108,8 @@ input[type='range'] {
      -ms-transform:rotate(90deg); 
      transform:rotate(90deg); 
 }
+
+
 input[type='range'],
 input[type='range']::-webkit-slider-runnable-track,
 input[type='range']::-webkit-slider-thumb {
@@ -115,18 +117,18 @@ input[type='range']::-webkit-slider-thumb {
 }
 input[type='range']::-webkit-slider-runnable-track {
   width: 200px;
-  height: 10px;
+  height: 2px;
   background: #AAA;
 }
 
 input[type='range']::-webkit-slider-thumb {
   position: relative;
-  height: 20px;
-  width: 20px;
+  height: 12px;
+  width: 12px;
   margin-top: -5px;
-  background: steelblue;
+  background: black;
   border-radius: 50%;
-  border: 2px solid white;
+ 
 }
 input[type='range']::-webkit-slider-thumb::before {
   position: absolute;
@@ -201,6 +203,12 @@ input[type='range']::-webkit-slider-thumb::before {
   width:120px;
 }
 
+.adjustTable{
+  margin-top:5px;
+  margin-left:-2px;
+  border : 1px solid;
+  width:6%;
+}
 
 
 </style>
@@ -221,15 +229,32 @@ input[type='range']::-webkit-slider-thumb::before {
    </div>
 
    <hr id="topLine" width = "100%" color = "black">
-   
    <div style=" width:65%; float:left; margin-top:15px;">
     <!--  <input type="range" class="fontSizeSlider" style="width:500px;" min="5" max="50">
      <input type="range" class="lineHeightSlider" style="width:500px;" orient="vertical" min="1" max="5"> -->
     <!-- <p class="result" id="result">차보라Brian</p> -->
     <!--  <textarea class="result" id="result" cols="50" rows="8" > -->
      <div id="result" class="result" contenteditable>
-       <input type="range" name="fSize" class="fontSizeSlider"  min="5" max="100" style="margin-top:35px;">
-       <input type="range" class="lineHeightSlider"  min="1" max="5" style="margin-top:75px;">
+       <div class="adjustTable" style="overflow:hidden;">
+        <p style="font-size:24px; margin-left:11px">A</p><br>
+        <input type="range" name="fSize" class="fontSizeSlider"  min="5" max="100" style="margin-top:-5px; "><br>
+        <p style="font-size:18px; margin-top:9px; margin-left:13px; margin-bottom: -15px;">A</p><br>
+       </div>
+       <div class="adjustTable" style="overflow:hidden; margin-top:-1px;">
+       <img src="image/vertical-double-arrow.png" style="width:25px; margin-top:5px; margin-left:7px;"><br>
+        <input type="range" class="lineHeightSlider"  min="1" max="5" style="margin-top:30px; margin-bottom: 30px;">
+       </div>
+       <div class="adjustTable" style="overflow:hidden; margin-top:-1px;">
+        <img src="image/double-arrow.png" style="width:25px; margin-top:2px; margin-left:7px;"><br>
+         <input type="range" class="lineHeightSlider"  min="1" max="5" style="margin-top:20px; margin-bottom: 30px;">
+       </div>
+       <div class="adjustTable" style="overflow:hidden; margin-top:-1px;">
+        <hr id="line1" style="margin-left:5px; margin-top:3px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
+        <hr id="line2" style="margin-left:5px; margin-top:4px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
+        <hr id="line3" style="margin-left:5px; margin-top:5px; margin-bottom: 0px; width:50%; border-top:1px solid black !important;">
+
+       </div>       
+
        <textarea class="tArea" cols="30" rows="4">hi</textarea>
      </div>
    </div>
