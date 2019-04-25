@@ -99,8 +99,13 @@ input[type='range'] {
   height: 25px;
   overflow: hidden;
   cursor: pointer;
+<<<<<<< HEAD
   /* border: 1px solid black; */
   margin-left:-16px;
+=======
+  border: none;
+  margin-left:-40px;
+>>>>>>> 44b36d515bb041aa57f05dc0cb48cc65b33aae24
 
    -webkit-transform:rotate(90deg); 
      -moz-transform:rotate(90deg); 
@@ -118,17 +123,30 @@ input[type='range']::-webkit-slider-thumb {
 input[type='range']::-webkit-slider-runnable-track {
   width: 200px;
   height: 2px;
+<<<<<<< HEAD
   background: #AAA;
+=======
+  background: black;
+>>>>>>> 44b36d515bb041aa57f05dc0cb48cc65b33aae24
 }
 
 input[type='range']::-webkit-slider-thumb {
   position: relative;
+<<<<<<< HEAD
   height: 12px;
   width: 12px;
   margin-top: -5px;
   background: black;
   border-radius: 50%;
  
+=======
+  height: 8px;
+  width: 8px;
+  margin-top: -2px;
+  background:black;
+  border-radius: 50%;
+  border: 1px solid black;
+>>>>>>> 44b36d515bb041aa57f05dc0cb48cc65b33aae24
 }
 input[type='range']::-webkit-slider-thumb::before {
   position: absolute;
@@ -146,7 +164,7 @@ input[type='range']::-webkit-slider-thumb::before {
   margin-top: -125px; 
   resize: none; 
   overflow: auto;
-  /*border:0;*/
+  border:0; 
   padding-left:5px;
   width:200px;
   height:100px;
@@ -203,11 +221,23 @@ input[type='range']::-webkit-slider-thumb::before {
   width:120px;
 }
 
+<<<<<<< HEAD
 .adjustTable{
   margin-top:5px;
   margin-left:-2px;
   border : 1px solid;
   width:6%;
+=======
+.modify{
+  border:1 !important;
+  border-color:brown;
+  border-style:dashed;
+}
+
+.rangeBox{
+  border:1px solid black;
+  position:relative;
+>>>>>>> 44b36d515bb041aa57f05dc0cb48cc65b33aae24
 }
 
 
@@ -230,10 +260,7 @@ input[type='range']::-webkit-slider-thumb::before {
 
    <hr id="topLine" width = "100%" color = "black">
    <div style=" width:65%; float:left; margin-top:15px;">
-    <!--  <input type="range" class="fontSizeSlider" style="width:500px;" min="5" max="50">
-     <input type="range" class="lineHeightSlider" style="width:500px;" orient="vertical" min="1" max="5"> -->
-    <!-- <p class="result" id="result">차보라Brian</p> -->
-    <!--  <textarea class="result" id="result" cols="50" rows="8" > -->
+    
      <div id="result" class="result" contenteditable>
        <div class="adjustTable" style="overflow:hidden;">
         <p style="font-size:24px; margin-left:11px">A</p><br>
@@ -317,6 +344,26 @@ input[type='range']::-webkit-slider-thumb::before {
    
 
 $(document).ready(function(){
+
+ 
+
+  $(document).on("mouseenter", ".tArea", function() {
+    $(this).css("border",1);
+    $(this).css("border-style","dashed");
+  });
+
+  $(document).on("mouseleave", ".tArea", function() {
+    $(this).css("border",0);
+  });
+
+  $(document).on("toggle", ".tArea", function() {
+    $(this).css("border",0);
+  });
+
+  $(document).on("click", ".tArea", function() {
+    $(".modify").removeClass("modify");
+    $(this).addClass("modify")
+  });
 
  $(document).on("click",".showDetail",function(){
 
@@ -404,18 +451,14 @@ $(document).ready(function(){
       var lineHeightSlider = $(".lineHeightSlider");
 
       fontSizeSlider.on('input', function() {
-          tArea.css("font-size",$(this).val() ); 
+        $(".modify").css("font-size",$(this).val() ); 
       });
 
       lineHeightSlider.on('input', function() {
-          tArea.css("line-height",$(this).val());
+        $(".modify").css("line-height",$(this).val());
       });
 
-      /*  var result = $(".result");
-      var slider = $(".slider")
-      slider.on('input', function() {
-          result.html( $(this).val() );
-          */
+    
       });
 
 
