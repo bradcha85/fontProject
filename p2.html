@@ -151,6 +151,7 @@ input[type='range']::-webkit-slider-thumb::before {
   width:200px;
   height:100px;
   font-size:30px;
+  
 }
 
 .simple{
@@ -221,11 +222,16 @@ input[type='range']::-webkit-slider-thumb::before {
   margin-left:30px;
   margin-top:-5px;
   margin-bottom: -10px;
+  cursor: pointer;
 }
 
 .statement{
- margin-top: -42px !important;
+ margin-top: -25px !important;
+ position:fixed;
+ cursor: pointer;
 }
+
+
 
 </style>
 </head>
@@ -262,7 +268,7 @@ input[type='range']::-webkit-slider-thumb::before {
        </div>
        <div class="adjustTable" style="overflow:hidden; margin-top:-1px;">
         <img src="image/double-arrow.png" style="width:25px; margin-top:2px; margin-left:7px;"><br>
-         <input type="range" class="lineHeightSlider"  min="1" max="5" style="margin-top:20px; margin-bottom: 30px;">
+         <input type="range" class="letterSpacingSlider"  min="1" max="25" style="margin-top:20px; margin-bottom: 30px;">
        </div>
        <div class="adjustTable" style="overflow:hidden; margin-top:-1px;">
         <hr style="margin-left:9px; margin-top:8px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
@@ -272,30 +278,7 @@ input[type='range']::-webkit-slider-thumb::before {
         <hr style="margin-left:9px; margin-top:5.2px; margin-bottom: 8px; width:40%; border-top:1px solid black;">
          <div class="triangle"></div>
        </div>   
-     <!--   <div id="sort">
-        <div id="leftSort" class="adjustTable statement" style="margin-left:40px;">
-          <hr style="margin-left:3px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black;">
-          <hr style="margin-left:3px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
-          <hr style="margin-left:3px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black;">
-          <hr style="margin-left:3px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
-          <hr style="margin-left:3px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black;">
-        </div>
-        <div id="centerSort" class="adjustTable statement" style="margin-left:79px;">
-          <hr style="margin-left:9px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black;">
-          <hr style="margin-left:10px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
-          <hr style="margin-left:9px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black;">
-          <hr style="margin-left:10px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
-          <hr style="margin-left:9px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black;">
-        </div>
-        <div id="rightSort" class="adjustTable statement" style="margin-left:118px;">
-          <hr style="margin-right:5px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black;">
-          <hr style="margin-right:5px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
-          <hr style="margin-right:5px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black;">
-          <hr style="margin-right:5px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
-          <hr style="margin-right:5px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black;">
-        </div>
-      </div> -->
-
+    
        <textarea class="tArea" cols="30" rows="4">hi</textarea>
      </div>
    </div>
@@ -363,42 +346,49 @@ $(document).ready(function(){
      
     let sort;
     if(sortToggle == "off"){
-      
-        sort  = ' <div id="sort">';
-        sort += ' <div id="leftSort" class="adjustTable statement" style="margin-left:40px;">';
-        sort +='<hr style="margin-left:3px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
-        sort +='<hr style="margin-left:3px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
-        sort +='<hr style="margin-left:3px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
-        sort +='<hr style="margin-left:3px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
-        sort +='<hr style="margin-left:3px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black;">';
-        sort +='</div>';
-        sort +='<div id="centerSort" class="adjustTable statement" style="margin-left:79px;">';
-        sort +='<hr style="margin-left:9px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
-        sort +='<hr style="margin-left:10px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';  
-        sort +='<hr style="margin-left:9px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
-        sort +='<hr style="margin-left:10px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
-        sort +='<hr style="margin-left:9px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black;">';  
-        sort +='</div>';
-        sort +='<div id="rightSort" class="adjustTable statement" style="margin-left:118px;">';
-        sort +='<hr style="margin-right:5px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
-        sort +='<hr style="margin-right:5px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
-        sort +='<hr style="margin-right:5px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
-        sort +='<hr style="margin-right:5px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
-        sort +='<hr style="margin-right:5px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black;">';
-        sort +='</div></div>';     
-        $("#result").append(sort);
+        sort  = '<div id="sort" style="margin-top:-16px; position:absolute;">';
+        sort += '<div id="leftSort" class="adjustTable statement" style="margin-left:40px;">';
+        sort += '<hr style="margin-left:3px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
+        sort += '<hr style="margin-left:3px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
+        sort += '<hr style="margin-left:3px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
+        sort += '<hr style="margin-left:3px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
+        sort += '<hr style="margin-left:3px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black;">';
+        sort += '</div>';
+        sort += '<div id="centerSort" class="adjustTable statement" style="margin-left:79px;">';
+        sort += '<hr style="margin-left:9px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
+        sort += '<hr style="margin-left:10px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';  
+        sort += '<hr style="margin-left:9px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
+        sort += '<hr style="margin-left:10px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
+        sort += '<hr style="margin-left:9px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black;">';  
+        sort += '</div>';
+        sort += '<div id="rightSort" class="adjustTable statement" style="margin-left:118px;">';
+        sort += '<hr style="margin-right:5px; margin-top:8px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
+        sort += '<hr style="margin-right:5px; margin-top:4.3px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
+        sort += '<hr style="margin-right:5px; margin-top:4.6px; margin-bottom: 0px; width:50%; border-top:1px solid black;">';
+        sort += '<hr style="margin-right:5px; margin-top:4.9px; margin-bottom: 0px; width:40%; border-top:1px solid black;">';
+        sort += '<hr style="margin-right:5px; margin-top:5.2px; margin-bottom: 8px; width:50%; border-top:1px solid black;">';
+        sort += '</div></div>';     
+        $(this).parent().append(sort);
         sortToggle = "on"
-    }else if(sortToggle=="on"){
+      }else if(sortToggle=="on"){
        $("#sort").remove();
        sortToggle="off";
     }
-      
+  });
+  ///////////////문단정렬//////////////////////////
+  $(document).on("click","#leftSort",function(){
+    $(".modify").css("text-align","left" ); 
   });
 
-  $(document).on("mouseenter", ".triangle", function() {
-    $(this).css("cursor","pointer");
-    
+  $(document).on("click","#centerSort",function(){
+    $(".modify").css("text-align","center" ); 
   });
+
+  $(document).on("click","#rightSort",function(){
+    $(".modify").css("text-align","right" ); 
+  });
+  ///////////////문단정렬//////////////////////////
+
 
   $(document).on("mouseenter", ".tArea", function() {
     $(this).css("border",1);
@@ -489,16 +479,15 @@ $(document).ready(function(){
         }
         addTag = false;
         no++;
-        
       }
-
     });
 
 
-      var result = $(".result");
-      var tArea =  $(".tArea");
-      var fontSizeSlider = $(".fontSizeSlider");
-      var lineHeightSlider = $(".lineHeightSlider");
+      let result = $(".result");
+      let tArea =  $(".tArea");
+      let fontSizeSlider = $(".fontSizeSlider");
+      let lineHeightSlider = $(".lineHeightSlider");
+      let letterSpacingSlider = $(".letterSpacingSlider");
 
       fontSizeSlider.on('input', function() {
         $(".modify").css("font-size",$(this).val() ); 
@@ -506,6 +495,10 @@ $(document).ready(function(){
       lineHeightSlider.on('input', function() {
         $(".modify").css("line-height",$(this).val());
       });
+      letterSpacingSlider.on('input', function() {
+        $(".modify").css("letter-spacing",$(this).val());
+      });
+
 
       /*  var result = $(".result");
       var slider = $(".slider")
