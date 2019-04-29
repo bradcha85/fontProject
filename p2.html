@@ -49,6 +49,14 @@
 
 
 
+#brandLogo{
+  margin-bottom: -25px;
+  margin-left:15px;
+  font-size: 75px;
+  float: left;
+  width:100%;
+}
+
 #result {
     -moz-appearance: textfield-multiline;
     -webkit-appearance: textarea;
@@ -59,21 +67,12 @@
     height: 500px;
     overflow: auto;
     padding: 2px;
-    resize: both;
+    /* resize: both; */
 }
-
 
 #topDiv{
   width: 100%;
   border-bottom:1px;
-}
-
-#brandLogo{
-  margin-bottom: 0px;
-  margin-left:15px;
-  font-size: 75px;
-  float: left;
-  width:100%;
 }
 
 #topLine{
@@ -169,8 +168,8 @@ input[type='range']::-webkit-slider-thumb::before {
 } 
 
 .simple > img {
-  float:left;
-  margin-left:25px;
+  float:right;
+  margin-right:25px;
   margin-top:22px;
 }
 
@@ -197,7 +196,15 @@ input[type='range']::-webkit-slider-thumb::before {
 .detail > img {
   float: right; 
   margin-top:-35px; 
-  margin-right:10px;
+  margin-right:25px;
+}
+
+.fontPrice{
+  width:80px; 
+  float:right; 
+  margin-right:-135px; 
+  margin-top:7px !important;
+  font-size:18px;
 }
 
 .drggableImage {
@@ -219,7 +226,7 @@ input[type='range']::-webkit-slider-thumb::before {
   border-bottom : 10px solid transparent;
   border-left : 10px solid transparent;
   transform: rotate(225deg);
-  margin-left:30px;
+  margin-left:28px;
   margin-top:-5px;
   margin-bottom: -10px;
   cursor: pointer;
@@ -241,8 +248,7 @@ input[type='range']::-webkit-slider-thumb::before {
    <p id="brandLogo">
    ourie
    </p>
-  
-   <div class="sMenu">test</div>
+
    <div class="sMenu">cart</div>
    <div class="sMenu">ask</div>
    <div class="sMenu">about</div>
@@ -251,26 +257,26 @@ input[type='range']::-webkit-slider-thumb::before {
    </div>
 
    <hr id="topLine" width = "100%" color = "black">
-   <div style=" width:65%; float:left; margin-top:15px;">
+   <div style=" width:65%; float:left;">
     <!--  <input type="range" class="fontSizeSlider" style="width:500px;" min="5" max="50">
      <input type="range" class="lineHeightSlider" style="width:500px;" orient="vertical" min="1" max="5"> -->
     <!-- <p class="result" id="result">차보라Brian</p> -->
     <!--  <textarea class="result" id="result" cols="50" rows="8" > -->
      <div id="result" class="result" contenteditable>
-       <div class="adjustTable" style="overflow:hidden;">
+       <div class="adjustTable" style="margin-top:-2px;">
         <p style="font-size:24px; margin-left:11px">A</p><br>
         <input type="range" name="fSize" class="fontSizeSlider"  min="5" max="100" style="margin-top:-5px; "><br>
         <p style="font-size:18px; margin-top:9px; margin-left:13px; margin-bottom: -15px;">A</p><br>
        </div>
-       <div class="adjustTable" style="overflow:hidden; margin-top:-1px;">
+       <div class="adjustTable" style="margin-top:-1px;">
        <img src="image/vertical-double-arrow.png" style="width:25px; margin-top:5px; margin-left:7px;"><br>
         <input type="range" class="lineHeightSlider"  min="1" max="5" style="margin-top:30px; margin-bottom: 30px;">
        </div>
-       <div class="adjustTable" style="overflow:hidden; margin-top:-1px;">
-        <img src="image/double-arrow.png" style="width:25px; margin-top:2px; margin-left:7px;"><br>
+       <div class="adjustTable" style="margin-top:-1px;">
+        <img src="image/vertical-double-arrow.png" style="width:25px; margin-top:2px; margin-left:7px; transform: rotate(90deg);"><br>
          <input type="range" class="letterSpacingSlider"  min="1" max="25" style="margin-top:20px; margin-bottom: 30px;">
        </div>
-       <div class="adjustTable" style="overflow:hidden; margin-top:-1px;">
+       <div class="adjustTable" style="margin-top:-1px;">
         <hr style="margin-left:9px; margin-top:8px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
         <hr style="margin-left:9px; margin-top:4.3px; margin-bottom: 0px; width:50%; border-top:1px solid black;">
         <hr style="margin-left:9px; margin-top:4.6px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
@@ -409,7 +415,9 @@ $(document).ready(function(){
 
      let fontSpec = $(this).parents(".fontSpec");
 
-     let detail  = '<p class="fontName">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
+     let detail =  '<img src="image/icon_buy.png" style="width:90px; margin-top:-25px;">';
+         detail += '<p class="fontPrice" font-family:'+$(this).parents(".fontSpec").attr("font")+'">$45</p>'
+         detail += '<p class="fontName" style="margin-top:35px;">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
          detail += '<p class="small">abcdefghijklmnopqrstuvwxyz<br>';
          detail += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>';
          detail += '0123456789!@#$%^&*()-_=+</p>';
@@ -482,7 +490,8 @@ $(document).ready(function(){
       }
     });
 
-
+    
+    ////폰트 사이즈 , 줄간격 , 자간 조절////////////
       let result = $(".result");
       let tArea =  $(".tArea");
       let fontSizeSlider = $(".fontSizeSlider");
@@ -498,13 +507,8 @@ $(document).ready(function(){
       letterSpacingSlider.on('input', function() {
         $(".modify").css("letter-spacing",$(this).val());
       });
+    ////폰트 사이즈 , 줄간격 , 자간 조절////////////
 
-
-      /*  var result = $(".result");
-      var slider = $(".slider")
-      slider.on('input', function() {
-          result.html( $(this).val() );
-          */
       });
 
 
