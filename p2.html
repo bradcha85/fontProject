@@ -416,7 +416,8 @@ $(document).ready(function(){
      let fontSpec = $(this).parents(".fontSpec");
 
      let detail =  '<img src="image/icon_buy.png" style="width:90px; margin-top:-25px;">';
-         detail += '<p class="fontPrice" font-family:'+$(this).parents(".fontSpec").attr("font")+'">$45</p>'
+         detail += '<p class="fontPrice" font-family:'+$(this).parents(".fontSpec").attr("font")+'">$45</p>';
+         detail += '<p class="fontStyle" style="float:right; margin-top:35px; margin-right:-85px; width:25px; height:25px; border:1px solid black;"></p>'
          detail += '<p class="fontName" style="margin-top:35px;">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
          detail += '<p class="small">abcdefghijklmnopqrstuvwxyz<br>';
          detail += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>';
