@@ -431,14 +431,16 @@ $(document).ready(function(){
   });
 
 
-$(document).on('keydown keyup mousedown mouseup change','.tArea', function () {
-  $(this).height(1).height( $(this).prop('scrollHeight')+2 );	
+$(document).on('keydown keyup mousedown mouseup','.tArea', function () {
+  $(this).height(1).height( $(this).prop('scrollHeight')+1 );	
 });
 
-$(document).on('scroll','.tArea', function () {
-  //$(this).height(1).height( $(this).prop('scrollHeight')+5 );	
-  alert("scroll");
+$(document).on('change','.tArea',function(){
+  //$(this).height(3).height( $(this).prop('scrollHeight')+2 );	
+  //$(this).css("height","55px");
+  console.log("test");
 });
+
 
 
 
