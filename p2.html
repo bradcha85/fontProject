@@ -238,6 +238,10 @@ input[type='range']::-webkit-slider-thumb::before {
  cursor: pointer;
 }
 
+.fontContent > .small{
+  font-size:20px;
+}
+
 .fontStyle{
   float:right; 
   margin-right:-90px; 
@@ -246,7 +250,6 @@ input[type='range']::-webkit-slider-thumb::before {
   border:1px solid black;
   text-align:center;
   font-size:19px;
-
 }
 
 </style>
@@ -408,6 +411,7 @@ $(document).ready(function(){
   $(document).on("mouseenter", ".tArea", function() {
     $(this).css("border",1);
     $(this).css("border-style","dashed");
+    $(this).draggable({cancel: 'text'});
   });
   $(document).on("mouseleave", ".tArea", function() {
     $(this).css("border",0);
@@ -429,7 +433,7 @@ $(document).ready(function(){
          detail += '<p class="fontStyle normal" style="margin-top:35px;">A</p>'
          detail += '<p class="fontStyle italic" style="margin-top:59px; font-style:italic;">A</p>'
          detail += '<p class="fontStyle bold" style="margin-top:83px; font-weight:900;">A</p>'
-         detail += '<div class="fontConent" style="margin-left:25px;">'; 
+         detail += '<div class="fontContent" style="margin-left:25px;">'; 
          detail += '<p class="fontName" style="margin-top:35px;">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
          detail += '<p class="small">abcdefghijklmnopqrstuvwxyz<br>';
          detail += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>';
@@ -444,22 +448,32 @@ $(document).ready(function(){
        fontSpec.append(detail);
 
     });
-
+    
+    let italicToggle = "on";
     $(document).on("click",".italic",function(){
-      $(this).parent().children(".fontConent").css("font-style","italic");      
+     if(italicToggle == "on"){
+      $(this).parent().children(".fontContent").css("font-style","italic");  
+      italicToggle = "off";  
+     }else if(italicToggle == "off"){
+      $(this).parent().children(".fontContent").css("font-style","normal"); 
+      italicToggle = "on"; 
+     }     
     });
 
     $(document).on("click",".normal",function(){
-      $(this).parent().children(".fontConent").css("font-style","normal");
-      $(this).parent().children(".fontConent").css("font-weight","normal");
-      
+      $(this).parent().children(".fontContent").css("font-style","normal");
+      $(this).parent().children(".fontContent").css("font-weight","normal");
     });
-
+    
+    let boldToggle = "on"
     $(document).on("click",".bold",function(){
-      $(this).parent().children(".fontConent").css("font-weight","bold");
-      
-      
-      
+      if(boldToggle == "on"){
+      $(this).parent().children(".fontContent").css("font-weight","bold");
+      boldToggle = "off";
+      }else if(boldToggle == "off"){
+       $(this).parent().children(".fontContent").css("font-weight","normal");
+       boldToggle = "on"; 
+      }
     });
 
 
@@ -479,7 +493,7 @@ $(document).ready(function(){
     })
 
 
-    $('.tArea').draggable({cancel: 'text'});
+    //$('.tArea').draggable({cancel: 'text'});
     let changedFont;
     let addTag = false;
 
