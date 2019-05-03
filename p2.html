@@ -182,13 +182,13 @@ input[type='range']::-webkit-slider-thumb::before {
   margin-top:10px;
 } 
 
-.detail > .fontName {
+.fontName {
   font-size: 25px;
   text-decoration: underline; 
   font-weight:bold;
 }
 
-.detail > .large {
+.large {
   font-size: 25px; 
   font-weight:bold;
 }
@@ -238,7 +238,16 @@ input[type='range']::-webkit-slider-thumb::before {
  cursor: pointer;
 }
 
+.fontStyle{
+  float:right; 
+  margin-right:-90px; 
+  width:25px; 
+  height:25px; 
+  border:1px solid black;
+  text-align:center;
+  font-size:19px;
 
+}
 
 </style>
 </head>
@@ -417,12 +426,16 @@ $(document).ready(function(){
 
      let detail =  '<img src="image/icon_buy.png" style="width:90px; margin-top:-25px;">';
          detail += '<p class="fontPrice" font-family:'+$(this).parents(".fontSpec").attr("font")+'">$45</p>';
-         detail += '<p class="fontStyle" style="float:right; margin-top:35px; margin-right:-85px; width:25px; height:25px; border:1px solid black;"></p>'
+         detail += '<p class="fontStyle normal" style="margin-top:35px;">A</p>'
+         detail += '<p class="fontStyle italic" style="margin-top:59px; font-style:italic;">A</p>'
+         detail += '<p class="fontStyle bold" style="margin-top:83px; font-weight:900;">A</p>'
+         detail += '<div class="fontConent" style="margin-left:25px;">'; 
          detail += '<p class="fontName" style="margin-top:35px;">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
          detail += '<p class="small">abcdefghijklmnopqrstuvwxyz<br>';
          detail += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>';
          detail += '0123456789!@#$%^&*()-_=+</p>';
          detail += '<p class="large">The quick brown fox jumps <br> over the lazy dog.</p>';
+         detail += '</div>'
          detail += '<img class="showSimple" src="image/minus.png">';
 
        fontSpec.empty();
@@ -430,7 +443,26 @@ $(document).ready(function(){
        fontSpec.addClass("detail");
        fontSpec.append(detail);
 
-    })
+    });
+
+    $(document).on("click",".italic",function(){
+      $(this).parent().children(".fontConent").css("font-style","italic");      
+    });
+
+    $(document).on("click",".normal",function(){
+      $(this).parent().children(".fontConent").css("font-style","normal");
+      $(this).parent().children(".fontConent").css("font-weight","normal");
+      
+    });
+
+    $(document).on("click",".bold",function(){
+      $(this).parent().children(".fontConent").css("font-weight","bold");
+      
+      
+      
+    });
+
+
 
     $(document).on("click",".showSimple",function(){
     
