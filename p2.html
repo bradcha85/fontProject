@@ -297,6 +297,9 @@ input[type='range']::-webkit-slider-thumb::before {
         <hr style="margin-left:9px; margin-top:5.2px; margin-bottom: 8px; width:40%; border-top:1px solid black;">
          <div class="triangle"></div>
        </div>   
+       <div class="adjustTable remove" style="margin-top:-1px; text-align: center;">
+        <img src="image/trash.png" style="width:35px; padding-top:5px; padding-bottom: 5px;">
+       </div>
        <textarea class="tArea" cols="30" rows="4">drag your fonts</textarea>
      </div>
    </div>
@@ -353,7 +356,7 @@ input[type='range']::-webkit-slider-thumb::before {
     });
     //return false;    
 });*/
-         
+
      
 
 $(document).ready(function(){
@@ -421,8 +424,23 @@ $(document).ready(function(){
   });
   $(document).on("click", ".tArea", function() {
     $(".modify").removeClass("modify");
-    $(this).addClass("modify")
+    $(this).addClass("modify");
   });
+  $(document).on("click", ".remove", function() {
+    $(".modify").remove();
+  });
+
+
+$(document).on('keydown keyup mousedown mouseup change','.tArea', function () {
+  $(this).height(1).height( $(this).prop('scrollHeight')+2 );	
+});
+
+$(document).on('scroll','.tArea', function () {
+  //$(this).height(1).height( $(this).prop('scrollHeight')+5 );	
+  alert("scroll");
+});
+
+
 
  $(document).on("click",".showDetail",function(){
 
@@ -475,8 +493,6 @@ $(document).ready(function(){
        boldToggle = "on"; 
       }
     });
-
-
 
     $(document).on("click",".showSimple",function(){
     
@@ -547,6 +563,7 @@ $(document).ready(function(){
 
       fontSizeSlider.on('input', function() {
         $(".modify").css("font-size",$(this).val() ); 
+       
       });
       lineHeightSlider.on('input', function() {
         $(".modify").css("line-height",$(this).val());
