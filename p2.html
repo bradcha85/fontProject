@@ -150,13 +150,11 @@ input[type='range']::-webkit-slider-thumb::before {
   width:200px;
   height:100px;
   font-size:30px;
-  
 }
 
 .simple{
   height:65px; 
   border-bottom: 2px solid;
-
 }
 
 .simple > p  {
@@ -270,10 +268,7 @@ input[type='range']::-webkit-slider-thumb::before {
    
    <hr id="topLine" width = "100%" color = "black">
    <div style=" width:65%; float:left;">
-    <!--  <input type="range" class="fontSizeSlider" style="width:500px;" min="5" max="50">
-     <input type="range" class="lineHeightSlider" style="width:500px;" orient="vertical" min="1" max="5"> -->
-    <!-- <p class="result" id="result">차보라Brian</p> -->
-    <!--  <textarea class="result" id="result" cols="50" rows="8" > -->
+ 
      <!-- <div id="result" class="result" contenteditable> -->
       <div id="result" class="result">
        <div class="adjustTable" style="margin-top:-2px;">
@@ -295,7 +290,7 @@ input[type='range']::-webkit-slider-thumb::before {
         <hr style="margin-left:9px; margin-top:4.6px; margin-bottom: 0px; width:40%; border-top:1px solid black;">
         <hr style="margin-left:9px; margin-top:4.9px; margin-bottom: 0px; width:50%; border-top:1px solid black;">
         <hr style="margin-left:9px; margin-top:5.2px; margin-bottom: 8px; width:40%; border-top:1px solid black;">
-         <div class="triangle"></div>
+        <div class="triangle"></div>
        </div>   
        <div class="adjustTable remove" style="margin-top:-1px; text-align: center;">
         <img src="image/trash.png" style="width:35px; padding-top:5px; padding-bottom: 5px;">
@@ -431,7 +426,7 @@ $(document).ready(function(){
   });
 
 
-$(document).on('keydown keyup mousedown mouseup','.tArea', function () {
+/* $(document).on('keydown keyup mousedown mouseup','.tArea', function () {
   $(this).height(1).height( $(this).prop('scrollHeight')+1 );	
 });
 
@@ -440,9 +435,7 @@ $(document).on('change','.tArea',function(){
   //$(this).css("height","55px");
   console.log("test");
 });
-
-
-
+ */
 
  $(document).on("click",".showDetail",function(){
 
@@ -466,7 +459,6 @@ $(document).on('change','.tArea',function(){
        fontSpec.removeClass("simple");
        fontSpec.addClass("detail");
        fontSpec.append(detail);
-
     });
     
     let italicToggle = "on";
@@ -491,8 +483,8 @@ $(document).on('change','.tArea',function(){
       $(this).parent().children(".fontContent").css("font-weight","bold");
       boldToggle = "off";
       }else if(boldToggle == "off"){
-       $(this).parent().children(".fontContent").css("font-weight","normal");
-       boldToggle = "on"; 
+      $(this).parent().children(".fontContent").css("font-weight","normal");
+      boldToggle = "on"; 
       }
     });
 
@@ -530,7 +522,7 @@ $(document).on('change','.tArea',function(){
        
       drop: function( event, ui ) {
        
-        let newArea = '<textarea class="tArea" id="'+no+'" cols="30" rows="4">'+changedFont+'</textarea>';
+        let newArea = '<textarea class="tArea" id="'+no+'" cols="30" rows="4" style="position:absolute;">'+changedFont+'</textarea>';
         let z_idx = 10;
         $('.tArea').draggable({
           cancel: 'text',
