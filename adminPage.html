@@ -1,0 +1,369 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>font</title>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+ <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<style>
+
+@font-face {
+  font-family: 'JejuMyeongjo'; 
+  src: url(JejuMyeongjo.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'JejuHallasan'; 
+  src: url(JejuHallasan.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'JejuGothic'; 
+  src: url(JejuGothic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'BMYEONSUNG'; 
+  src: url(BMYEONSUNG.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'BMHANNAPro'; 
+  src: url(BMHANNAPro.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'BMHANNA_11yrs'; 
+  src: url(BMHANNA_11yrs.ttf) format('truetype');
+}
+
+
+
+#brandLogo{
+  margin-bottom: -25px;
+  margin-left:15px;
+  font-size: 75px;
+  float: left;
+  width:100%;
+}
+
+#result {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+    padding: 2px;
+    /* resize: both; */
+}
+
+#topDiv{
+  width: 100%;
+  border-bottom:1px;
+}
+
+#topLine{
+ border-top: 2px solid !important;
+ margin-bottom: 0px;
+}
+
+.sMenu{
+ float:right;
+ margin-right: 15px;
+ margin-bottom: 10px;
+ font-size: 20px;
+
+}
+
+.fontSpec{
+  cursor: pointer;
+}
+
+input[type='range'] {
+  
+  width: 70px;
+  height: 25px;
+  overflow: hidden;
+  cursor: pointer;
+  /* border: 1px solid black; */
+  margin-left:-16px;
+
+   -webkit-transform:rotate(90deg); 
+     -moz-transform:rotate(90deg); 
+     -o-transform:rotate(90deg); 
+     -ms-transform:rotate(90deg); 
+     transform:rotate(90deg); 
+}
+
+
+input[type='range'],
+input[type='range']::-webkit-slider-runnable-track,
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  width: 200px;
+  height: 2px;
+  background: #AAA;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  position: relative;
+  height: 12px;
+  width: 12px;
+  margin-top: -5px;
+  background: black;
+  border-radius: 50%;
+ 
+}
+input[type='range']::-webkit-slider-thumb::before {
+  position: absolute;
+  content: '';
+  height: 10px; /* equal to height of runnable track */
+  width: 500px; /* make this bigger than the widest range input element */
+  left: -502px; /* this should be -2px - width */
+  top: 8px; /* don't change this */
+  background: #777;
+}
+
+
+.tArea{
+  margin-left: 45px; 
+  margin-top: -125px; 
+  resize: none; 
+  overflow: auto;
+  /*border:0;*/
+  padding-left:5px;
+  width:200px;
+  height:100px;
+  font-size:30px;
+  
+}
+
+.simple{
+  height:65px; 
+  border-bottom: 2px solid;
+
+}
+
+.simple > p  {
+  float:left;
+  font-size: 16px; 
+  font-weight:bold;
+  margin-left:25px;
+  margin-top:14px;
+} 
+
+.simple > img {
+  float:right;
+  margin-right:25px;
+  margin-top:22px;
+}
+
+.detail{
+  border-bottom: 2px solid;
+}
+
+.detail > p  {
+  margin-left:25px; 
+  margin-top:10px;
+} 
+
+.fontName {
+  font-size: 25px;
+  text-decoration: underline; 
+  font-weight:bold;
+}
+
+.large {
+  font-size: 25px; 
+  font-weight:bold;
+}
+
+.detail > img {
+  float: right; 
+  margin-top:-35px; 
+  margin-right:25px;
+}
+
+.fontPrice{
+  width:80px; 
+  float:right; 
+  margin-right:-135px; 
+  margin-top:7px !important;
+  font-size:18px;
+}
+
+.drggableImage {
+  width:120px;
+}
+
+.adjustTable{
+  margin-top:5px;
+  margin-left:-2px;
+  border : 1px solid;
+  width:40px;
+}
+
+.triangle{
+  width : 0;
+  height : 0;
+  border-top : 10px solid transparent;
+  border-right : 10px solid #111111;
+  border-bottom : 10px solid transparent;
+  border-left : 10px solid transparent;
+  transform: rotate(225deg);
+  margin-left:28px;
+  margin-top:-5px;
+  margin-bottom: -10px;
+  cursor: pointer;
+}
+
+.statement{
+ margin-top: -25px !important;
+ position:fixed;
+ cursor: pointer;
+}
+
+.fontContent > .small{
+  font-size:20px;
+}
+
+.fontStyle{
+  float:right; 
+  margin-right:-90px; 
+  width:25px; 
+  height:25px; 
+  border:1px solid black;
+  text-align:center;
+  font-size:19px;
+}
+
+</style>
+</head>
+<body>
+   
+   <div id="topDiv">
+   <p id="brandLogo">
+   ourie admin
+   </p>
+  
+   <button id="addFont" type="button" style="margin-top:20px;"class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+    add font
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">add font</h4>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="fontName">폰트이름</label>
+                  <input type="text" class="form-control" id="fontName" placeholder="폰트이름">
+                </div>
+                <div class="form-group">
+                  <label for="fontPrice">가격</label>
+                  <input type="text" class="form-control" id="fontPrice" placeholder="폰트가격">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputFile">폰트파일 선택</label>
+                  <input type="file" id="exampleInputFile">
+                </div>
+              
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+
+   </div>
+   
+   <hr id="topLine" width = "100%" color = "black">
+   <div style=" width:65%; float:left;">
+    <!--  <input type="range" class="fontSizeSlider" style="width:500px;" min="5" max="50">
+     <input type="range" class="lineHeightSlider" style="width:500px;" orient="vertical" min="1" max="5"> -->
+    <!-- <p class="result" id="result">차보라Brian</p> -->
+    <!--  <textarea class="result" id="result" cols="50" rows="8" > -->
+     <!-- <div id="result" class="result" contenteditable> -->
+     
+   </div>
+
+ <div id="rightDiv" style="width: 35%; float:right; border-left:2px solid;">
+  
+       <div class="fontSpec simple" font="JejuMyeongjo" style="font-family: JejuMyeongjo; overflow: scroll;">
+        <p class="fontName">JejuMyeongjo</p><br>
+        <p class="price">$45</p>
+        <p class="amount">1500개 판매</p>
+        <img class="showDetail" src="image/minus.png">
+       </div> 
+
+       <div class="fontSpec simple" font="JejuHallasan" style="font-family: JejuHallasan">
+        <p class="fontName">JejuHallasan</p>
+         <img class="showDetail" src="image/add.png">
+       </div>
+       
+       <div class="fontSpec simple" font="JejuGothic" style="font-family: JejuGothic">
+        <p class="fontName">JejuGothic</p>
+         <img class="showDetail" src="image/add.png">
+       </div>
+
+       <div class="fontSpec simple" font="BMYEONSUNG" style="font-family: BMYEONSUNG">
+        <p class="fontName">BMYEONSUNG</p>
+         <img class="showDetail" src="image/add.png">
+       </div>
+
+       <div class="fontSpec simple" font="BMHANNAPro" style="font-family: BMHANNAPro">
+        <p class="fontName">BMHANNAPro</p>
+         <img class="showDetail" src="image/add.png">
+       </div>
+
+       <div class="fontSpec simple" font="BMHANNA_11yrs" style="font-family: BMHANNA_11yrs">
+        <p class="fontName">BMHANNA_11yrs</p>
+         <img class="showDetail" src="image/add.png">
+       </div>
+
+   
+ </div>
+
+
+
+  <script>
+
+
+
+$(document).ready(function(){
+      
+});
+                      
+        </script>
+   
+  </body>
+  </html>
+  
+  
+  
+  
+		

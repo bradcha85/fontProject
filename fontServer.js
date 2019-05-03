@@ -42,6 +42,10 @@ app.listen(3000,function(){
 
 app.get('/',function(req,res){
         res.sendFile(__dirname +'/p2.html')
+	 });
+	 
+app.get('/admin',function(req,res){
+        res.sendFile(__dirname +'/adminPage.html')
      });
 
 
