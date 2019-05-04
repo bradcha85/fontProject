@@ -42,10 +42,24 @@ app.listen(3000,function(){
     console.log('server on')
 });
 
+app.use(session({
+
+	secret: '98765411', // 쿠키에 저장할 connect.sid값을 암호화할 키값 입력
+
+	resave: false,                //세션 아이디를 접속할때마다 새롭게 발급하지 않음
+
+	saveUninitialized: true       //세션 아이디를 실제 사용하기전에는 발급하지 않음
+
+}));
+
 app.get('/',function(req,res){
 	 
 	//if문을 써서 분기를 나누자.. 세션이 있으면 유저정보와 함께 ejs로 렌더링하고 
 	// 없으면 html로 렌더링
+	if (req.session.user){ 
+		console.log("session"); 
+		res.render("../main", req.session.user);
+	};
         res.sendFile(__dirname +'/main.html');
 	 });
 	 
@@ -71,15 +85,7 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
     
 	});
 
-	app.use(session({
-
-		secret: '98765411', // 쿠키에 저장할 connect.sid값을 암호화할 키값 입력
 	
-		resave: false,                //세션 아이디를 접속할때마다 새롭게 발급하지 않음
-	
-		saveUninitialized: true       //세션 아이디를 실제 사용하기전에는 발급하지 않음
-	
-	}));
 
 	app.post('/session', function(req, res){
 
