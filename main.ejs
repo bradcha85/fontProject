@@ -201,7 +201,7 @@ input[type='range']::-webkit-slider-thumb::before {
   width:80px; 
   float:right; 
   margin-right:-135px; 
-  margin-top:7px !important;
+  margin-top:40px !important;
   font-size:18px;
 }
 
@@ -248,6 +248,10 @@ input[type='range']::-webkit-slider-thumb::before {
   border:1px solid black;
   text-align:center;
   font-size:19px;
+}
+
+.modify{
+  border:3px solid red !important;
 }
 
 </style>
@@ -546,15 +550,15 @@ $("#my").on("click",function(){
 
   $(document).on("mouseenter", ".tArea", function() {
     $(this).css("border",1);
-    $(this).css("border-style","dashed");
+    $(this).css("border-style","dashed"); 
     $(this).draggable({cancel: 'text'});
   });
-  $(document).on("mouseleave", ".tArea", function() {
+   $(document).on("mouseleave", ".tArea", function() {
     $(this).css("border",0);
-  });
-  $(document).on("toggle", ".tArea", function() {
+  }); 
+  /* $(document).on("toggle", ".tArea", function() {
     $(this).css("border",0);
-  });
+  }); */
   $(document).on("click", ".tArea", function() {
     $(".modify").removeClass("modify");
     $(this).addClass("modify");
@@ -562,6 +566,7 @@ $("#my").on("click",function(){
   $(document).on("click", ".remove", function() {
     $(".modify").remove();
   });
+  
 
 
 /* $(document).on('keydown keyup mousedown mouseup','.tArea', function () {
@@ -580,10 +585,11 @@ $(document).on('change','.tArea',function(){
      let fontSpec = $(this).parents(".fontSpec");
 
      let detail =  '<img src="image/icon_buy.png" style="width:90px; margin-top:-25px;">';
+         detail += '<img src="image/icon_cart.png" style="width:90px; margin-top:10px; margin-right:-90px;">';
          detail += '<p class="fontPrice" font-family:'+$(this).parents(".fontSpec").attr("font")+'">$45</p>';
-         detail += '<p class="fontStyle normal" style="margin-top:35px;">A</p>'
-         detail += '<p class="fontStyle italic" style="margin-top:59px; font-style:italic;">A</p>'
-         detail += '<p class="fontStyle bold" style="margin-top:83px; font-weight:900;">A</p>'
+         detail += '<p class="fontStyle normal" style="margin-top:65px;">A</p>'
+         detail += '<p class="fontStyle italic" style="margin-top:89px; font-style:italic;">A</p>'
+         detail += '<p class="fontStyle bold" style="margin-top:113px; font-weight:900;">A</p>'
          detail += '<div class="fontContent" style="margin-left:25px;">'; 
          detail += '<p class="fontName" style="margin-top:35px;">'+ $(this).parents(".fontSpec").attr("font")+'</p>';
          detail += '<p class="small">abcdefghijklmnopqrstuvwxyz<br>';

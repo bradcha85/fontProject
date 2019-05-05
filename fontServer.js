@@ -43,19 +43,14 @@ app.listen(3000,function(){
 });
 
 app.use(session({
-
 	secret: '98765411', // 쿠키에 저장할 connect.sid값을 암호화할 키값 입력
-
 	resave: false,                //세션 아이디를 접속할때마다 새롭게 발급하지 않음
-
 	saveUninitialized: true       //세션 아이디를 실제 사용하기전에는 발급하지 않음
-
 }));
 
 app.get('/',function(req,res){
 	 
-	//if문을 써서 분기를 나누자.. 세션이 있으면 유저정보와 함께 ejs로 렌더링하고 
-	// 없으면 html로 렌더링
+	//if문 써서 분기를 나누기
 	if(req.session.user){ 
 		 console.log("session exist"); 
 		 res.render("../main", req.session.user);
@@ -104,12 +99,10 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 		if(req.session.user){
 			//request에 세션 내용이 있을 경우
 			console.log("session use", req.session.user["mail"]);
-			
 			//res.sendFile(__dirname +'/main.html')
 			res.redirect("/");
 		}else{
 			//request에 세션 내용이 없을 경우
-
 			let mysql      = require('mysql');
 			let connection = mysql.createConnection({
 				host     : 'localhost',
@@ -123,19 +116,20 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 			let sql = 'SELECT password FROM USERS WHERE mail = "'+mail+'"';
 			connection.query(sql, function(err, rows, fields) {
 				if (!err){
-					console.log('result: ', rows);
-					console.log('result2 : ', rows[0].password);
+					console.log('mail : ', rows[0].mail);
+					console.log('password : ', rows[0].password);
 
 					if (rows[0].password == pw){
-						console.log("correct password");
+						
 						req.session.user ={
 																mail: mail,
 																pw: pw,
 																authorized: true
 															};
-						//res.render("../main",req.session.user);
+						
+						console.log("correct password");
 						res.send({"isSuccess" : "true"});
-						//res.redirect("/");
+					
 					}else{
 						console.log("wrong password");
 						res.send({"isSuccess" : "false"});
@@ -164,15 +158,6 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 	});
 
 	
-
-
-
-
-
-
-
-
-
 
 
 
