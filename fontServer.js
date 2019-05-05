@@ -30,6 +30,10 @@ let storage = multer.diskStorage({
 	filename: function(req, file, callback){ 
 			callback(null, file.originalname) 
 			console.log("실제 파일이름 : " , file.originalname);
+			console.log("확장자 제외한 파일이름 : " ,file.originalname.split("\.")[0]);
+			console.log("확장자 : " ,file.originalname.split("\.")[1]);
+			console.log("랜덤파일이름 : " , generateFontName()+'.'+file.originalname.split("\.")[1]);
+
 		} 
 
 });
@@ -237,7 +241,15 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 	
 
 		
-		
+function generateFontName(){
+			var text = "";
+			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			
+			for( var i=0; i < 8; i++ )
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+			
+			return text;
+		}		
 
 	
 

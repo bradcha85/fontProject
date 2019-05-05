@@ -366,10 +366,6 @@ input[type='range']::-webkit-slider-thumb::before {
         </div>
       </div>
     </div>
-
-
-
-
    </div>
    
    <hr id="topLine" width = "100%" color = "black">
@@ -863,7 +859,7 @@ $(document).on('change','.tArea',function(){
                                     "}\n" );
 
                                     
-                                    let newTextArea = '<textarea class="tArea" id="'+addNo+'" cols="30" rows="4">'+result["originalName"].split("\.")[0]+'</textarea>';
+                                    let newTextArea = '<textarea class="tArea" id="'+addNo+'" cols="30" rows="4" style="position:absolute;">'+result["originalName"].split("\.")[0]+'</textarea>';
                                     $('.result').append(newTextArea);
                                     $('#'+addNo).css({"font-family": randomFontName});                   
                                     $('#'+addNo).offset({ top: e.pageY, left: e.pageX-60});
