@@ -28,7 +28,9 @@ let storage = multer.diskStorage({
 		
 	}, 
 	filename: function(req, file, callback){ 
-			callback(null, file.originalname) } 
+			callback(null, file.originalname) 
+			console.log("실제 파일이름 : " , file.originalname);
+		} 
 
 });
 
@@ -66,13 +68,6 @@ app.get('/',function(req,res){
   });
 	 
 app.get('/admin',function(req,res){
-
- 
-
-
-
-
-
 
         res.render('../adminPage')
      });
