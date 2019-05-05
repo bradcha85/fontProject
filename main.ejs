@@ -269,7 +269,7 @@ input[type='range']::-webkit-slider-thumb::before {
    <div class="sMenu">about</div>
    <div class="sMenu">style</div>
    <% if(mail){ %>
-    <div class="sMenu" id="my" onclick="location.href='http://localhost:3000/my'">my</div>
+    <div class="sMenu" id="my">my</div>
     <% }%>
    <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -288,16 +288,74 @@ input[type='range']::-webkit-slider-thumb::before {
                   <label for="pw">password</label>
                   <input type="password" class="form-control" name="pw" id="pw" placeholder="password">
                 </div>
-             
+              </form>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="signUp">Sign up for free</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="loginSubmit">Login</button>
         </div>
-      </form>
+     
       </div>
     </div>
   </div>
+
+
+  <div class="modal fade" id="myInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">my information</h4>
+        </div>
+        <div class="modal-body">
+          <% if(mail){ %>
+           <div> mail : <%=mail%> </div><br>
+           <div> password : <%=pw%>  </div>
+            <% }%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="myInfoAdjust">adjust</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="signUpForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Sign up</h4>
+          </div>
+          <div class="modal-body">
+              <form method="POST" id="loginData">
+                  <div class="form-group">
+                    <label for="mail_signUp">mail</label>
+                    <input type="text" class="form-control" name="mail_signUp" id="mail_signUp" placeholder="mail">
+                  </div>
+                  <div class="form-group">
+                    <label for="pw_signUp">password</label>
+                    <input type="password" class="form-control" name="pw_signUp" id="pw_signUp" placeholder="password">
+                  </div>
+                  <div class="form-group">
+                      <label for="pw_signUp_confirm">password check</label>
+                      <input type="password" class="form-control" name="pw_signUp_confirm" id="pw_signUp_confirm" placeholder="password check">
+                  </div>
+                </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" id="signUp">Sign up</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+       
+        </div>
+      </div>
+    </div>
+
+
+
 
    </div>
    
@@ -391,6 +449,13 @@ input[type='range']::-webkit-slider-thumb::before {
 
 $(document).ready(function(){
 
+  $("#signUp").on("click",function(){
+    $("#loginForm").modal("hide");
+    $("#signUpForm").modal("show");
+    
+  });
+
+
 
   $("#loginSubmit").on("click",function(){
   
@@ -409,6 +474,21 @@ $(document).ready(function(){
                 console.log("correct pw");
                 location.href='http://localhost:3000/';
               }
+          }
+  })
+}); 
+
+$("#my").on("click",function(){
+  
+  $.ajax({
+          url:"http://localhost:3000/my",
+          data: '',
+          type:'POST',
+          dataType:'json',
+          success:function(result){
+
+            console.log(result["mail"]);
+            $('#myInfo').modal('show')  
           }
   })
 }); 
