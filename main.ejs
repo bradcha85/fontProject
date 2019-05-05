@@ -260,19 +260,17 @@ input[type='range']::-webkit-slider-thumb::before {
    </p>
    
   <% if(mail){ %>
-    <h2>Welcome! <%= mail %></h2>
+    <div class="sMenu" id="logout" onclick="location.href='http://localhost:3000/logout'">logout</div>
   <% }else{ %>
-    <h2></h2>
-  <% } %>
+      <div class="sMenu" id="login" data-toggle="modal" data-target="#loginForm">login</div>
+  <% }%>
    <div class="sMenu">cart</div>
    <div class="sMenu">ask</div>
    <div class="sMenu">about</div>
    <div class="sMenu">style</div>
    <% if(mail){ %>
-    <div class="sMenu" id="logout">logout</div>
-   <% }else{ %>
-    <div class="sMenu" id="login" data-toggle="modal" data-target="#loginForm">login</div>
-   <% }%>
+    <div class="sMenu" id="my" onclick="location.href='http://localhost:3000/my'">my</div>
+    <% }%>
    <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -281,7 +279,7 @@ input[type='range']::-webkit-slider-thumb::before {
           <h4 class="modal-title" id="myModalLabel">Login</h4>
         </div>
         <div class="modal-body">
-            <form method="POST" action="http://localhost:3000/session">
+            <form method="POST" id="loginData">
                 <div class="form-group">
                   <label for="mail">mail</label>
                   <input type="text" class="form-control" name="mail" id="mail" placeholder="mail">
@@ -294,7 +292,7 @@ input[type='range']::-webkit-slider-thumb::before {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" id="loginSubmit">Login</button>
+          <button type="button" class="btn btn-primary" id="loginSubmit">Login</button>
         </div>
       </form>
       </div>
@@ -392,8 +390,31 @@ input[type='range']::-webkit-slider-thumb::before {
      
 
 $(document).ready(function(){
+
+
+  $("#loginSubmit").on("click",function(){
+  
+  $.ajax({
+          url:"http://localhost:3000/login",
+          data: {'mail': $("#mail").val(),
+                  'pw' : $("#pw").val()},
+          type:'POST',
+          dataType:'json',
+          cache:false,
+          success:function(result){
+              console.log(result);
+              if(result["isSuccess"] == "false"){
+                alert("틀린 비밀번호");
+              }else{
+                console.log("correct pw");
+                location.href='http://localhost:3000/';
+              }
+          }
+  })
+}); 
+
       
-    let sortToggle = "off";
+  let sortToggle = "off";
 
   $(document).on("click", ".triangle", function() {
      

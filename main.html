@@ -85,6 +85,7 @@
  margin-right: 15px;
  margin-bottom: 10px;
  font-size: 20px;
+ cursor: pointer;
 
 }
 
@@ -273,7 +274,7 @@ input[type='range']::-webkit-slider-thumb::before {
           <h4 class="modal-title" id="myModalLabel">Login</h4>
         </div>
         <div class="modal-body">
-            <form method="POST" action="http://localhost:3000/session">
+            <form method="POST" id="loginData">
                 <div class="form-group">
                   <label for="mail">mail</label>
                   <input type="text" class="form-control" name="mail" id="mail" placeholder="mail">
@@ -286,7 +287,7 @@ input[type='range']::-webkit-slider-thumb::before {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" id="loginSubmit">Login</button>
+          <button type="button" class="btn btn-primary" id="loginSubmit">Login</button>
         </div>
       </form>
       </div>
@@ -384,7 +385,26 @@ input[type='range']::-webkit-slider-thumb::before {
      
 
 $(document).ready(function(){
-      
+   $("#loginSubmit").on("click",function(){
+  
+  $.ajax({
+                url:"http://localhost:3000/login",
+                data: {'mail': $("#mail").val(),
+                        'pw' : $("#pw").val()},
+                type:'POST',
+                dataType:'json',
+                cache:false,
+                success:function(result){
+                    console.log(result);
+                    if(result["isSuccess"] == "false"){
+                      alert("틀린 비밀번호");
+                    }else{
+                      console.log("correct pw");
+                      location.href='http://localhost:3000/';
+                    }
+            }
+  })
+}); 
     let sortToggle = "off";
 
   $(document).on("click", ".triangle", function() {
