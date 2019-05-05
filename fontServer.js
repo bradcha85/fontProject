@@ -34,7 +34,6 @@ let storage = multer.diskStorage({
 			console.log("확장자 제외한 파일이름 : " ,file.originalname.split("\.")[0]);
 			console.log("확장자 : " ,file.originalname.split("\.")[1]);
 			console.log("랜덤파일이름 : " , generateFontName()+'.'+file.originalname.split("\.")[1]);
-
 		} 
 
 });

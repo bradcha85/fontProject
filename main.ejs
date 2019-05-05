@@ -694,14 +694,25 @@ $(document).on('change','.tArea',function(){
     let changedFont;
     let addTag = false;
 
-    $(".fontSpec").draggable({
+     $(".fontSpec").draggable({
         helper: "clone",
         cursor: 'pointer',
+        /* handle : $(".fontName"), */
         start: function( event, ui ) {
           changedFont = $(this).attr("font");
           addTag = true;
+
         }
-    });
+    });  
+
+     /* $(".fontName").draggable({
+        helper: "clone",
+        cursor: 'pointer',
+        start: function( event, ui ) {
+          changedFont = $(this).text();
+          addTag = true;
+        }
+    });  */
 
     var no = 1;
 
@@ -713,7 +724,8 @@ $(document).on('change','.tArea',function(){
         let z_idx = 10;
         $('.tArea').draggable({
           cancel: 'text',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          containment: "parent"
         }).mousedown(function(){
             $(this).css('z-index', z_idx); // 클릭한 textarea 제일 위로 올라오게끔.
             z_idx++;
