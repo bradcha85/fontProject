@@ -89,12 +89,11 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 
 	app.post('/login', function(req, res){
 		
-    console.log("req : " , req)
+    console.log("login... req : " , req)
 		var mail = req.body.mail || req.query.mail;
 		var pw = req.body.pw || req.query.pw;
 		
-		console.log(mail);
-		console.log(pw);
+		console.log("parameterCheck" , mail , pw);
 
 		if(req.session.user){
 			//request에 세션 내용이 있을 경우
@@ -113,27 +112,34 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 			});
 			connection.connect();
 			
-			let sql = 'SELECT password FROM USERS WHERE mail = "'+mail+'"';
-			connection.query(sql, function(err, rows, fields) {
+		//	let sql = 'SELECT password FROM USERS WHERE mail = "'+mail+'"';
+			let sql = 'SELECT password FROM USERS WHERE mail = ?';
+			let params = mail;
+			connection.query(sql, params, function(err, rows, fields) {
 				if (!err){
-					console.log('mail : ', rows[0].mail);
-					console.log('password : ', rows[0].password);
+					console.log("rows length : " , rows.length);
+					if(rows.length>=1){
+						
+						console.log('password : ', rows[0].password);
 
-					if (rows[0].password == pw){
-						
-						req.session.user ={
-																mail: mail,
-																pw: pw,
-																authorized: true
-															};
-						
-						console.log("correct password");
-						res.send({"isSuccess" : "true"});
+						if (rows[0].password == pw){
 					
-					}else{
-						console.log("wrong password");
-						res.send({"isSuccess" : "false"});
-					}
+							req.session.user ={
+																	mail: mail,
+																	pw: pw,
+																	authorized: true
+																};
+							
+							console.log("correct password");
+							res.send({"statusCode" : "success"});
+						
+						}else{
+							console.log("wrong password");
+							res.send({"statusCode" : "wrongPassword"});
+						}
+				 }else{
+					res.send({"statusCode" : "invalidMail"});
+				 }
 				}
 				else{
 					console.log('Error while performing Query.', err);
@@ -142,6 +148,7 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 
 			connection.end();
 		}
+	});
 	
 	 app.get('/logout',function(req,res){
 			req.session.destroy();
@@ -151,11 +158,83 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 	 app.post('/my', function(req, res){
 			console.log("myInfo : " ,req.session.user);
 			res.send(req.session.user);
-			
 	 });
 
-	
+	 app.post('/signUp', function(req, res){
+
+			console.log("signUp..")
+
+			var mail = req.body.mail || req.query.mail;
+			var pw = req.body.pw || req.query.pw;
+
+			let mysql      = require('mysql');
+			let connection = mysql.createConnection({
+				host     : 'localhost',
+				user     : 'root',
+				password : 'root',
+				port     : 3306,
+				database : 'my_db'
+			});
+			connection.connect();
+		
+			//let sql = 'INSERT INTO USERS (mail, password) VALUES("'+mail+'","'+pw+'")';
+			let sql = 'INSERT INTO USERS (mail, password) VALUES(?,?)';
+			let params = [mail,pw];
+			connection.query(sql,params,function(err, rows, fields) {
+				if (!err){
+					console.log(rows);
+
+					}else{
+					console.log("error")
+					}
+				});
+
+			connection.end();
 	});
+
+	app.post('/mailCheck', function(req, res){
+
+		console.log("mailCheck..")
+	
+		var mail = req.body.mail || req.query.mail;
+
+		console.log(mail)
+
+		let mysql      = require('mysql');
+		let connection = mysql.createConnection({
+			host     : 'localhost',
+			user     : 'root',
+			password : 'root',
+			port     : 3306,
+			database : 'my_db'
+		});
+		connection.connect();
+	
+		//let sql = 'INSERT INTO USERS (mail, password) VALUES("'+mail+'","'+pw+'")';
+		let sql = 'SELECT mail FROM USERS WHERE mail = ?';
+		let params = mail;
+		connection.query(sql, params, function(err, rows, fields) {
+			if (!err){
+				console.log(rows);
+				console.log("row length", rows.length);
+				if(rows.length<1){
+					res.send({"isPossible" : "true"});
+				}else{
+					res.send({"isPossible" : "false"});	
+				}
+			}else{	
+				console.log("error")
+				}
+			});
+
+		connection.end();
+});
+
+
+	
+
+		
+		
 
 	
 
