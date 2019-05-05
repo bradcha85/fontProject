@@ -155,7 +155,8 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 	 });
 
 	 app.get('/my', function(req, res){
-      console.log("myInfo : " ,req.session.user);
+			console.log("myInfo : " ,req.session.user);
+			
 	 });
 
 	
