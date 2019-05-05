@@ -29,6 +29,7 @@ let storage = multer.diskStorage({
 	}, 
 	filename: function(req, file, callback){ 
 			callback(null, file.originalname) 
+			console.log("req확인 : ", req.body);
 			console.log("실제 파일이름 : " , file.originalname);
 			console.log("확장자 제외한 파일이름 : " ,file.originalname.split("\.")[0]);
 			console.log("확장자 : " ,file.originalname.split("\.")[1]);
@@ -79,8 +80,9 @@ app.get('/admin',function(req,res){
 
 app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) { 
 	let file = req.file 
-	console.log(file);
-	console.log("parameter check : " + req.body.cType);
+	console.log("파일정보" , file);
+	console.log("body check : " , req.body);
+	console.log("parameter check : " , req.body.cType);
 	let originalName = file.originalname;
 	console.log(file.originalname.split("\.")[1]);
 	
