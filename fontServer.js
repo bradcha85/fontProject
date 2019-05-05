@@ -66,7 +66,15 @@ app.get('/',function(req,res){
   });
 	 
 app.get('/admin',function(req,res){
-        res.sendFile(__dirname +'/adminPage.html')
+
+ 
+
+
+
+
+
+
+        res.render('../adminPage')
      });
 
 
