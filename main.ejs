@@ -756,7 +756,6 @@ $(document).on('change','.tArea',function(){
 
       fontSizeSlider.on('input', function() {
         $(".modify").css("font-size",$(this).val() ); 
-       
       });
       lineHeightSlider.on('input', function() {
         $(".modify").css("line-height",$(this).val());
@@ -846,9 +845,9 @@ $(document).on('change','.tArea',function(){
                 }
              
                 let formData = new FormData();
-                formData.append("fontUpload", file);
-                formData.append("cType","testString");
-                console.log("contetn type : " + contentType);
+                formData.append("fontRender", file);
+                formData.append("uploadType","fontRender");
+                console.log("contents type : " + contentType);
                 $.ajax({
                 url:"http://localhost:3000/fontUpload",
                 data:formData,
@@ -870,7 +869,7 @@ $(document).on('change','.tArea',function(){
                                         "\turl('"+result["originalName"]+"') format('opentype');\n" +    
                                     "}\n" );
 
-                                    
+                                  
                                     let newTextArea = '<textarea class="tArea" id="'+addNo+'" cols="30" rows="4" style="position:absolute;">'+result["originalName"].split("\.")[0]+'</textarea>';
                                     $('.result').append(newTextArea);
                                     $('#'+addNo).css({"font-family": randomFontName});                   

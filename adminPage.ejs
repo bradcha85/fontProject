@@ -88,12 +88,6 @@ table, tr, td{
 }
 
 
-
-
-
-
-
-
 </style>
 </head>
 <body>
@@ -126,15 +120,15 @@ table, tr, td{
                   <input type="text" class="form-control" id="fontPrice" placeholder="폰트가격">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputFile">폰트파일 선택</label>
-                  <input type="file" id="exampleInputFile">
+                  <label for="fontUpload">폰트파일 선택</label>
+                  <input type="file" id="fontUpload">
                 </div>
               
               </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" id="uploadSubmit"class="btn btn-primary">upload</button>
         </div>
       </div>
     </div>
@@ -211,8 +205,54 @@ table, tr, td{
 
 
 $(document).ready(function(){
-      
-});
+
+  let uploadSize = 10;
+
+ $("#uploadSubmit").on("click",function(){
+            console.log("upload");
+            var files = document.getElementById('fontUpload').files;
+            var file = files[0];
+            var fileName = file.name;
+            var fileNameArr = fileName.split("\.");
+            var ext = fileNameArr[fileNameArr.length - 1]; // 확장자
+            var fileSize = file.size / 1024 / 1024; // 파일 사이즈(단위 :MB)
+            var contentType = "";
+
+            if($.inArray(ext, ['ttf', 'eot', 'woff', 'otf']) < 0){
+                    // 확장자 체크
+                    alert("폰트 파일형식만 지원합니다.");
+                    return;
+              }else if(fileSize > uploadSize){
+                    // 파일 사이즈 체크
+                    alert("용량 초과\n업로드 가능 용량 : " + uploadSize + " MB");
+                    return;
+              }
+            if(files != null){
+                if(files.length < 1){
+                    alert("폴더 업로드 불가");
+                    return;
+                }
+                let formData = new FormData();
+                formData.append("fontUpload", file);
+                formData.append("uploadType", "fontUpload")
+                formData.append("fontName",$("#fontName").val());
+                formData.append("fontPrice",$("#fontPrice").val());
+                $.ajax({
+                url:"http://localhost:3000/fontUpload",
+                data:formData,
+                type:'POST',
+                enctype:'multipart/form-data',
+                processData:false,
+                contentType:false,
+                dataType:'json',
+                cache:false,
+                success:function(result){
+                    alert("폰트등록 성공");
+                }
+              });
+            }
+    });
+  });
                       
         </script>
    

@@ -10,31 +10,32 @@ const client = require('cheerio-httpcli');
 const fs = require('fs');
 const multer = require("multer");
 
-
-
-
 app.set('view engine', 'ejs'); 
 app.set('views', __dirname +'/views');
 
-app.use(express.static('upload'));
+app.use(express.static('fontUpload'));
 app.use('/image', express.static('image'));
-app.use('/upload', express.static('upload'));
+app.use('/fontUpload', express.static('fontUpload'));
+app.use('/fontRender', express.static('fontRender'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
+let rName;
 
 let storage = multer.diskStorage({ 
 	destination: function(req, file ,callback){ 
-		callback(null, "upload/") 
-		
+		console.log("destination.." , file.fieldname);
+		if(file.fieldname == "fontUpload") callback(null, "fontUpload/");
+		else if(file.fieldname == "fontRender") callback(null, "fontRender/");
 	}, 
 	filename: function(req, file, callback){ 
-			callback(null, file.originalname) 
-			//console.log("file객체 : ", file);
-			console.log("파일 필드 : " , file.fieldname);
-			console.log("실제 파일이름 : " , file.originalname);
-			console.log("확장자 제외한 파일이름 : " ,file.originalname.split("\.")[0]);
-			console.log("확장자 : " ,file.originalname.split("\.")[1]);
-			console.log("랜덤파일이름 : " , generateFontName()+'.'+file.originalname.split("\.")[1]);
+		
+			if(file.fieldname == "fontUpload"){
+				callback(null, file.originalname);
+				rName = "random_"+generateFontName()+'.'+file.originalname.split("\.")[1];
+				callback(null, rName);
+				console.log("랜덤파일이름(in multer) : " , rName);
+			} 
+			else if(file.fieldname == "fontRender") callback(null, file.originalname);
 		} 
 
 });
@@ -77,21 +78,59 @@ app.get('/admin',function(req,res){
         res.render('../adminPage')
      });
 
+let uploadField = upload.fields([{ name: 'fontRender', maxCount: 8 }, { name: 'fontUpload', maxCount: 8 }])
+//app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) { 
+app.post('/fontUpload', uploadField, function(req, res, next) { 
 
-app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) { 
-	let file = req.file 
-	console.log("파일정보" , file);
-	console.log("body check : " , req.body);
-	console.log("parameter check : " , req.body.cType);
-	let originalName = file.originalname;
-	console.log(file.originalname.split("\.")[1]);
+	let uploadType = req.body.uploadType;
+	console.log("uploadType" , uploadType);
+
+	if(uploadType == "fontRender"){
+		console.log("타입 : fontRender")
+		let file = req.files['fontRender'][0];
+		let result = { originalName : file.originalname, 
+										size : file.size, 
+								 } 
+		res.send(result); 
+	 }else if(uploadType == "fontUpload"){
+		console.log("req정보" , req)
+		let file = req.files['fontUpload'][0];
+		let fontName = req.body.fontName;
+		let fontPrice = req.body.fontPrice;
+		let originalFilename = file.originalname;
+		let randomFilename = rName;
+		
+		console.log("파일정보" , fontName,fontPrice, originalFilename, randomFilename);
+
+		let mysql      = require('mysql');
+		let connection = mysql.createConnection({
+			host     : 'localhost',
+			user     : 'root',
+			password : 'root1212',
+			port     : 3306,
+			database : 'my_db'
+		});
+		connection.connect();
 	
+		//let sql = 'INSERT INTO USERS (mail, password) VALUES("'+mail+'","'+pw+'")';
+		let sql = 'INSERT INTO FONTS(font_name, font_price, font_filename, font_rfilename) VALUES(?,?,?,?)';
+		let params = [fontName,fontPrice,originalFilename,randomFilename];
+		connection.query(sql,params,function(err, rows, fields) {
+			if (!err){
+				console.log(rows);
+				}else{
+				console.log("error")
+				console.log(err);
+				}
+			});
+		connection.end();
 
-	let result = { originalName : file.originalname, 
-				   size : file.size, 
-				 } 
+		let result = { originalName : file.originalname, 
+			size : file.size, 
+	 	} 
+		res.send(result);
+	 }
 
-	res.send(result); 
 
 	});
 
@@ -113,9 +152,9 @@ app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) {
 			//request에 세션 내용이 없을 경우
 			let mysql      = require('mysql');
 			let connection = mysql.createConnection({
-				host     : 'localhost',
+				host     : '127.0.0.1',
 				user     : 'root',
-				password : 'root',
+				password : 'root1212',
 				port     : 3306,
 				database : 'my_db'
 			});
