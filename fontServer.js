@@ -84,20 +84,30 @@ app.get('/admin',function(req,res){
 			database : 'my_db'
 		});
 		connection.connect();
-
+ 
 		let sql = 'SELECT * FROM FONTS';
-
+		let resultArray = new Array();
 		connection.query(sql,function(err, rows, fields) {
 			if (!err){
 				console.log("폰트 ROW :" , rows[0]);
+				for(var i = 0; i<rows.length; i++){
+					let fontSpec = { "fontName" : rows[i].FONT_NAME ,
+												   "fontPrice" : rows[i].FONT_PRICE
+													}
+					resultArray.push(fontSpec);
+					
+				}
 				}else{
 				console.log("error")
 				console.log(err);
 				}
+				console.log("배열안 객체확인 ", JSON.stringify(resultArray[1]));
+				res.render('../adminPage' , {content : resultArray});
 			});
 		connection.end();
+	
 
-		res.render('../adminPage')
+	
  });
 
 let uploadField = upload.fields([{ name: 'fontRender', maxCount: 8 }, { name: 'fontUpload', maxCount: 8 }])
