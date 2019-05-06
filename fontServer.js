@@ -29,7 +29,8 @@ let storage = multer.diskStorage({
 	}, 
 	filename: function(req, file, callback){ 
 			callback(null, file.originalname) 
-			console.log("req확인 : ", req.body);
+			//console.log("file객체 : ", file);
+			console.log("파일 필드 : " , file.fieldname);
 			console.log("실제 파일이름 : " , file.originalname);
 			console.log("확장자 제외한 파일이름 : " ,file.originalname.split("\.")[0]);
 			console.log("확장자 : " ,file.originalname.split("\.")[1]);
