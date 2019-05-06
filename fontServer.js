@@ -71,12 +71,34 @@ app.get('/',function(req,res){
 			});
 		 				
 		}
-  });
+});
 	 
 app.get('/admin',function(req,res){
 
-        res.render('../adminPage')
-     });
+		let mysql      = require('mysql');
+		let connection = mysql.createConnection({
+			host     : 'localhost',
+			user     : 'root',
+			password : 'root',
+			port     : 3306,
+			database : 'my_db'
+		});
+		connection.connect();
+
+		let sql = 'SELECT * FROM FONTS';
+
+		connection.query(sql,function(err, rows, fields) {
+			if (!err){
+				console.log("폰트 ROW :" , rows[0]);
+				}else{
+				console.log("error")
+				console.log(err);
+				}
+			});
+		connection.end();
+
+		res.render('../adminPage')
+ });
 
 let uploadField = upload.fields([{ name: 'fontRender', maxCount: 8 }, { name: 'fontUpload', maxCount: 8 }])
 //app.post('/fontUpload', upload.single("fontUpload"), function(req, res, next) { 
@@ -106,7 +128,7 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 		let connection = mysql.createConnection({
 			host     : 'localhost',
 			user     : 'root',
-			password : 'root1212',
+			password : 'root',
 			port     : 3306,
 			database : 'my_db'
 		});
