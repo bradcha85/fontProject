@@ -85,6 +85,11 @@
 
 table, tr, td{
   border:1px solid black;
+  text-align:center;
+}
+
+tr, td{
+  padding : 5px 5px 5px 5px;
 }
 
 
@@ -97,10 +102,6 @@ table, tr, td{
    ourie admin
    </p>
   
-   <button id="addFont" type="button" style="margin-top:20px;"class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-    add font
-  </button>
-  
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -108,8 +109,8 @@ table, tr, td{
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">add font</h4>
-        </div>
-        <div class="modal-body">
+         </div>
+         <div class="modal-body">
             <form>
                 <div class="form-group">
                   <label for="fontName">폰트이름</label>
@@ -132,77 +133,36 @@ table, tr, td{
         </div>
       </div>
     </div>
-  </div>
+   </div>
    
-
    </div>
    
    <hr id="topLine" width = "100%" color = "black">
    <div style=" width:65%; float:left;">
-    <!--  <input type="range" class="fontSizeSlider" style="width:500px;" min="5" max="50">
-     <input type="range" class="lineHeightSlider" style="width:500px;" orient="vertical" min="1" max="5"> -->
-    <!-- <p class="result" id="result">차보라Brian</p> -->
-    <!--  <textarea class="result" id="result" cols="50" rows="8" > -->
-     <!-- <div id="result" class="result" contenteditable> -->
-     
    </div>
 
- <!-- <div id="fontAdmin" style="width: 35%; border-left:2px solid; font-size:18px;">
-  
-       <div class="fontSpec" font="JejuMyeongjo" style="font-family: JejuMyeongjo; overflow:hidden;">
-        <p class="fontName">JejuMyeongjo</p><br>
-        <div><p class="price" style="float:left;">$45</p> <button type="button" class="btn btn-primary small" style="margin-left:45px;">수정</button></div>
-        <p class="salesRate">1500개 판매</p>
-        <img class="showDetail" src="image/minus.png">
-       </div> 
-
-       <div class="fontSpec" font="JejuHallasan" style="font-family: JejuHallasan">
-        <p class="fontName">JejuHallasan</p>
-         <img class="showDetail" src="image/add.png">
-       </div>
-       
-       <div class="fontSpec simple" font="JejuGothic" style="font-family: JejuGothic">
-        <p class="fontName">JejuGothic</p>
-         <img class="showDetail" src="image/add.png">
-       </div>
-
-       <div class="fontSpec simple" font="BMYEONSUNG" style="font-family: BMYEONSUNG">
-        <p class="fontName">BMYEONSUNG</p>
-         <img class="showDetail" src="image/add.png">
-       </div>
-
-       <div class="fontSpec simple" font="BMHANNAPro" style="font-family: BMHANNAPro">
-        <p class="fontName">BMHANNAPro</p>
-         <img class="showDetail" src="image/add.png">
-       </div>
-       <div class="fontSpec simple" font="BMHANNA_11yrs" style="font-family: BMHANNA_11yrs">
-        <p class="fontName">BMHANNA_11yrs</p>
-         <img class="showDetail" src="image/add.png">
-       </div>
- </div> -->
-
+    <button id="addFont" type="button" style="margin-top:20px;"class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+      add font
+    </button>
       <table style="border:1px solid black; font-size:22px;">
         <tr>
-          <td>순서</td>
-          <td>font명</td>
-          <td>가격</td>
-          <td>판매량</td>
+          <td>no</td>
+          <td>font name</td>
+          <td>price</td>
+          <td>sales rate</td>
         </tr>
-        <tr>
-        <td>1</td>
-        <td font="JejuMyeongjo" style="font-family: JejuMyeongjo; overflow:hidden; border:1px solid black;">
-          JejuMyeongjo
-        </td>
-        <td>45</td>
-        <td>1800</td>
-      </tr>
+        <%for (var i = 0; i < content.length; i++){ %>
+           <tr>
+            <td> <%=content[i].fontNo%></td>
+            <td style="font-family: JejuMyeongjo; overflow:hidden; border:1px solid black;"> 
+            <%=content[i].fontName%>
+            </td> 
+            <td><%=content[i].fontPrice%></td>
+            <td><%=content[i].fontSalesRate%></td>
+           </tr>
+        <%}%>
       </table>
       
-      <%=content[0].fontName %>
-      
-
-
-
   <script>
 
 
@@ -250,8 +210,8 @@ $(document).ready(function(){
                 dataType:'json',
                 cache:false,
                 success:function(result){
-                    console.log("result?");
-                    console.log(result);
+                    console.log("result : " , result);
+                    location.href='http://localhost:3000/admin';
                 }
               });
             }

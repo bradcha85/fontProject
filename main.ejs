@@ -458,6 +458,8 @@ input[type='range']::-webkit-slider-thumb::before {
 
 $(document).ready(function(){
 
+  let mailPossibleCheck = "possible"; 
+
   $("#mail_signUp").on("keyup",function(){
     console.log($("#mail_signUp").val());
 
@@ -471,12 +473,11 @@ $(document).ready(function(){
                 $(".mailCheck").text("possible");
               }else{
                 $(".mailCheck").text("mail already taken");
+                mailPossibleCheck = "impossible"
               }
             }
     })
   });
-
-
 
   $("#signUp").on("click",function(){
     $("#loginForm").modal("hide");
@@ -484,10 +485,18 @@ $(document).ready(function(){
   });
 
   $("#signUpSubmit").on("click",function(){
+
+    
     if($("#pw_signUp").val() != $("#pw_signUp_confirm").val()){
       alert("check your password");
       return;
     }
+
+    if( mailPossibleCheck == "impossible"){
+      alert("mail already taken");
+      return;
+    }
+
   
   $.ajax({
           url:"http://localhost:3000/signUp",

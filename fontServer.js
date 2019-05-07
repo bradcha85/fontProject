@@ -37,14 +37,9 @@ let storage = multer.diskStorage({
 			} 
 			else if(file.fieldname == "fontRender") callback(null, file.originalname);
 		} 
-
 });
 
-
-
 let upload = multer({ dest: "upload/", storage:storage });
-
-
 
 app.listen(3000,function(){
     console.log('server on')
@@ -69,7 +64,6 @@ app.get('/',function(req,res){
 				pw: '',
 				authorized: true
 			});
-		 				
 		}
 });
 	 
@@ -91,9 +85,12 @@ app.get('/admin',function(req,res){
 			if (!err){
 				console.log("폰트 ROW :" , rows[0]);
 				for(var i = 0; i<rows.length; i++){
-					let fontSpec = { "fontName" : rows[i].FONT_NAME ,
-												   "fontPrice" : rows[i].FONT_PRICE
-													}
+					let fontSpec = { 
+						             "fontNo" : rows[i].FONT_NO ,
+						             "fontName" : rows[i].FONT_NAME ,
+									 "fontPrice" : rows[i].FONT_PRICE ,
+									 "fontSalesRate" : rows[i].FONT_SALESRATE 
+									}
 					resultArray.push(fontSpec);
 					
 				}
@@ -105,8 +102,6 @@ app.get('/admin',function(req,res){
 				res.render('../adminPage' , {content : resultArray});
 			});
 		connection.end();
-	
-
 	
  });
 
@@ -145,8 +140,8 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 		connection.connect();
 	
 		//let sql = 'INSERT INTO USERS (mail, password) VALUES("'+mail+'","'+pw+'")';
-		let sql = 'INSERT INTO FONTS(font_name, font_price, font_filename, font_rfilename) VALUES(?,?,?,?)';
-		let params = [fontName,fontPrice,originalFilename,randomFilename];
+		let sql = 'INSERT INTO FONTS(font_name, font_price, font_salesrate, font_filename, font_rfilename) VALUES(?,?,?,?,?)';
+		let params = [fontName,fontPrice,0,originalFilename,randomFilename];
 		connection.query(sql,params,function(err, rows, fields) {
 			if (!err){
 				console.log(rows);
@@ -159,13 +154,10 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 
 		let result = { originalName : file.originalname, 
 			size : file.size, 
-	 	} 
+	 		} 
 		res.send(result);
 	 }
-
-
 	});
-
 
 	app.post('/login', function(req, res){
 		
@@ -186,7 +178,7 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 			let connection = mysql.createConnection({
 				host     : '127.0.0.1',
 				user     : 'root',
-				password : 'root1212',
+				password : 'root',
 				port     : 3306,
 				database : 'my_db'
 			});
@@ -205,9 +197,9 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 						if (rows[0].password == pw){
 					
 							req.session.user ={
-																	mail: mail,
-																	pw: pw,
-																	authorized: true
+												mail: mail,
+												pw: pw,
+												authorized: true
 																};
 							
 							console.log("correct password");
@@ -225,7 +217,6 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 					console.log('Error while performing Query.', err);
 				}
 			});
-
 			connection.end();
 		}
 	});
@@ -263,7 +254,7 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 			connection.query(sql,params,function(err, rows, fields) {
 				if (!err){
 					console.log(rows);
-
+                    res.send();
 					}else{
 					console.log("error")
 					}
