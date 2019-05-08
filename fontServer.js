@@ -75,7 +75,7 @@ app.get('/admin',function(req,res){
 			user     : 'root',
 			password : 'root',
 			port     : 3306,
-			database : 'my_db'
+			database : 'font'
 		});
 		connection.connect();
  
@@ -135,7 +135,7 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 			user     : 'root',
 			password : 'root',
 			port     : 3306,
-			database : 'my_db'
+			database : 'font'
 		});
 		connection.connect();
 	
@@ -180,7 +180,7 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 				user     : 'root',
 				password : 'root',
 				port     : 3306,
-				database : 'my_db'
+				database : 'font'
 			});
 			connection.connect();
 			
@@ -244,7 +244,7 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 				user     : 'root',
 				password : 'root',
 				port     : 3306,
-				database : 'my_db'
+				database : 'font'
 			});
 			connection.connect();
 		
@@ -277,7 +277,7 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 			user     : 'root',
 			password : 'root',
 			port     : 3306,
-			database : 'my_db'
+			database : 'font'
 		});
 		connection.connect();
 	
