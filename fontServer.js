@@ -19,8 +19,8 @@ app.use('/fontUpload', express.static('fontUpload'));
 app.use('/fontRender', express.static('fontRender'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
-let rName;
 
+let rName;
 let storage = multer.diskStorage({ 
 	destination: function(req, file ,callback){ 
 		console.log("destination.." , file.fieldname);
