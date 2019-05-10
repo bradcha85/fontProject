@@ -75,6 +75,9 @@ app.get('/',function(req,res){
 		}
 });
 	 
+app.get('/cool', function(request, response) {
+  response.send(cool());
+});
 app.get('/admin',function(req,res){
 
 		let mysql      = require('mysql');
@@ -183,13 +186,16 @@ app.post('/fontUpload', uploadField, function(req, res, next) {
 		}else{
 			//request에 세션 내용이 없을 경우
 			let mysql      = require('mysql');
-			let connection = mysql.createConnection({
+
+		 	let connection = mysql.createConnection({
 				host     : '127.0.0.1',
 				user     : 'root',
 				password : 'root',
 				port     : 3306,
 				database : 'font'
-			});
+			}); 
+
+			
 			connection.connect();
 			
 		//	let sql = 'SELECT password FROM USERS WHERE mail = "'+mail+'"';

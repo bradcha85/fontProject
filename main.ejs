@@ -478,6 +478,7 @@ $(document).ready(function(){
             success:function(result){
               if(result["isPossible"] == "true"){
                 $(".mailCheck").text("possible");
+                mailPossibleCheck = "possible"; 
               }else{
                 $(".mailCheck").text("mail already taken");
                 mailPossibleCheck = "impossible"
