@@ -8,10 +8,12 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const client = require('cheerio-httpcli'); 
 const fs = require('fs');
-const multer = require("multer");
+const multer = require('multer');
+const cool = require('cool-ascii-faces');
 
 app.set('view engine', 'ejs'); 
 app.set('views', __dirname +'/views');
+app.set('port', (process.env.PORT || 3000));
 
 app.use(express.static('fontUpload'));
 app.use('/image', express.static('image'));
@@ -41,15 +43,21 @@ let storage = multer.diskStorage({
 
 let upload = multer({ dest: "upload/", storage:storage });
 
-app.listen(3000,function(){
+/* app.listen(3000,function(){
     console.log('server on')
-});
+}); */
+
+app.listen(app.get('port'), function() {
+	console.log('Node app is running on port', app.get('port'));
+  });
 
 app.use(session({
 	secret: '98765411', // 쿠키에 저장할 connect.sid값을 암호화할 키값 입력
 	resave: false,                //세션 아이디를 접속할때마다 새롭게 발급하지 않음
 	saveUninitialized: true       //세션 아이디를 실제 사용하기전에는 발급하지 않음
 }));
+
+
 
 app.get('/',function(req,res){
 	 
