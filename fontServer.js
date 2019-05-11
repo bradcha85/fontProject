@@ -16,9 +16,9 @@ app.set('views', __dirname +'/views');
 app.set('port', (process.env.PORT || 3000));
 
 app.use(express.static('fontUpload'));
-app.use('/image', express.static('image'));
-app.use('/fontUpload', express.static('fontUpload'));
-app.use('/fontRender', express.static('fontRender'));
+app.use('/image', express.static(__dirname+'/image'));
+app.use('/fontUpload', express.static(__dirname+'fontUpload'));
+app.use('/fontRender', express.static(__dirname+'fontRender'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
